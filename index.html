@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>キKiddoシ - Liens Officiels</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0d0e15;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-color: #ffffff;
+            --primary-glow: #ff007f;
+            --secondary-glow: #00f0ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Arrière-plan animé (Particules Cyber) */
+        .bg-animate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #1a1c29 0%, #0d0e15 100%);
+        }
+
+        .bg-animate::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background-image: radial-gradient(rgba(255, 0, 127, 0.1) 1px, transparent 0),
+                              radial-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 0);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            top: -50%;
+            left: -50%;
+            animation: backgroundMove 30s linear infinite;
+        }
+
+        @keyframes backgroundMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(40px, 40px); }
+        }
+
+        /* Conteneur principal */
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 40px 20px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        /* Profil / En-tête */
+        .profile-header {
+            margin-bottom: 35px;
+            animation: fadeInDown 1.2s ease-out;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 20px;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid transparent;
+            background-image: linear-gradient(var(--bg-color), var(--bg-color)), linear-gradient(45deg, var(--primary-glow), var(--secondary-glow));
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.4);
+            position: relative;
+            z-index: 2;
+        }
+
+        .avatar-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow));
+            filter: blur(15px);
+            opacity: 0.6;
+            z-index: 1;
+            animation: pulseGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(0.95); opacity: 0.4; }
+            100% { transform: scale(1.05); opacity: 0.8; }
+        }
+
+        .username {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #fff, #a5a6bc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(255,255,255,0.1);
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: #8a8b9c;
+            margin-top: 5px;
+            letter-spacing: 1px;
+        }
+
+        /* Grille des boutons de réseaux sociaux */
+        .links-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 24px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        /* Animation décalée pour chaque bouton */
+        .link-item:nth-child(1) { animation-delay: 0.2s; --item-color: #000000; --glow: rgba(0,0,0,0.5); }
+        .link-item:nth-child(2) { animation-delay: 0.3s; --item-color: #ff0000; --glow: rgba(255,0,0,0.4); }
+        .link-item:nth-child(3) { animation-delay: 0.4s; --item-color: #0088cc; --glow: rgba(0,136,204,0.4); }
+        .link-item:nth-child(4) { animation-delay: 0.5s; --item-color: #25d366; --glow: rgba(37,211,102,0.4); }
+        .link-item:nth-child(5) { animation-delay: 0.6s; --item-color: #1877f2; --glow: rgba(24,119,242,0.4); }
+        .link-item:nth-child(6) { animation-delay: 0.7s; --item-color: #e1306c; --glow: rgba(225,48,108,0.4); }
+        .link-item:nth-child(7) { animation-delay: 0.8s; --item-color: #34a853; --glow: rgba(52,168,83,0.4); }
+
+        .link-item i {
+            font-size: 1.4rem;
+            width: 30px;
+            text-align: left;
+            transition: transform 0.3s ease;
+        }
+
+        .link-item span {
+            flex-grow: 1;
+            text-align: center;
+            margin-right: 30px; /* Aligner parfaitement le texte au centre */
+            letter-spacing: 0.5px;
+        }
+
+        /* Effets au Survol (Hover) */
+        .link-item:hover {
+            transform: scale(1.03);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--item-color);
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        .link-item:hover i {
+            transform: scale(1.2);
+            color: var(--item-color);
+        }
+
+        /* Style spécifique pour TikTok car fond noir par défaut survolé en couleur TikTok */
+        .link-item:nth-child(1):hover {
+            border-color: #00f0ff;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3), 0 0 20px rgba(255, 0, 127, 0.3);
+        }
+
+        /* Keyframes Animations */
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Mobile optimize */
+        @media (max-width: 400px) {
+            .username { font-size: 1.5rem; }
+            .link-item { padding: 14px 20px; font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-animate"></div>
+
+    <div class="container">
+        
+        <header class="profile-header">
+            <div class="avatar-wrapper">
+                <img src="https://i.ibb.co/HLGHY12Z/Kiddo.webp" alt="キKiddoシ Profile" class="avatar">
+                <div class="avatar-glow"></div>
+            </div>
+            <h1 class="username">キKiddoシ</h1>
+            <p class="tagline">Retrouvez-moi sur tous mes réseaux ! 🎮🔥</p>
+        </header>
+
+        <main class="links-grid">
+            
+            <a href="https://www.tiktok.com/@kiddo_gamplay?_r=1&_t=ZS-97hckWffTBR" target="_blank" class="link-item">
+                <i class="fab fa-tiktok"></i>
+                <span>TikTok</span>
+            </a>
+
+            <a href="https://youtube.com/@kiddo_gamplay?si=RmeSYLyUSfaXWprB" target="_blank" class="link-item">
+                <i class="fab fa-youtube"></i>
+                <span>YouTube</span>
+            </a>
+
+            <a href="https://t.me/KiddoGamplay" target="_blank" class="link-item">
+                <i class="fab fa-telegram-plane"></i>
+                <span>Telegram</span>
+            </a>
+
+            <a href="https://www.whatsapp.com/channel/0029VbCF1Ux4CrfalXO1Yh2Z" target="_blank" class="link-item">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </a>
+
+            <a href="https://www.facebook.com/profile.php?id=61577173139608" target="_blank" class="link-item">
+                <i class="fab fa-facebook-f"></i>
+                <span>Facebook</span>
+            </a>
+
+            <a href="https://www.instagram.com/kiddo_gamplay?igsh=ZHF3bHhqaXJyZnQ=" target="_blank" class="link-item">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+
+            <a href="https://my.play/キKiddoシ" target="_blank" class="link-item">
+                <i class="fab fa-google-play"></i>
+                <span>Google Play</span>
+            </a>
+
+        </main>
+    </div>
+
+    <!-- Élément audio pour l'effet de clic -->
+    <audio id="clickSound" preload="auto">
+        <source src="https://www.directfiles.link/9HQDH5HHH/floraphonic-arcade-ui-6-229503.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const clickSound = document.getElementById("clickSound");
+        clickSound.volume = 0.4; // Ajustement du volume pour l'audio en ligne
+
+        document.querySelectorAll(".link-item").forEach(button => {
+            button.addEventListener("click", function(e) {
+                e.preventDefault();
+
+                const url = this.href;
+
+                clickSound.currentTime = 0;
+                clickSound.play().catch(() => {});
+
+                setTimeout(() => {
+                    window.open(url, "_blank", "noopener,noreferrer");
+                }, 150);
+            });
+        });
+    </script>
+
+</body>
+</html>
