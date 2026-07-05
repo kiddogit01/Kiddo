@@ -6,22 +6,18 @@
     <title>キKiddoシ - Liens Officiels</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    
+
     <style>
         :root {
-            --bg-color: #0d0e15;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --border-color: rgba(255, 255, 255, 0.08);
-            --text-color: #ffffff;
-            --primary-glow: #ff007f;
+            --bg-color:       #0d0e15;
+            --card-bg:        rgba(255, 255, 255, 0.03);
+            --border-color:   rgba(255, 255, 255, 0.08);
+            --text-color:     #ffffff;
+            --primary-glow:   #ff007f;
             --secondary-glow: #00f0ff;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Poppins', sans-serif;
@@ -29,122 +25,152 @@
             color: var(--text-color);
             min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             overflow-x: hidden;
             position: relative;
+            padding: 40px 20px 60px;
         }
 
-        /* Arrière-plan animé (Particules Cyber) */
+        /* ─── Fond animé ─────────────────────────────────────────────── */
         .bg-animate {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: -1;
             background: radial-gradient(circle at 50% 50%, #1a1c29 0%, #0d0e15 100%);
         }
-
         .bg-animate::before {
             content: '';
             position: absolute;
-            width: 200%;
-            height: 200%;
-            background-image: radial-gradient(rgba(255, 0, 127, 0.1) 1px, transparent 0),
-                              radial-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 0);
+            width: 200%; height: 200%;
+            background-image:
+                radial-gradient(rgba(255,0,127,0.10) 1px, transparent 0),
+                radial-gradient(rgba(0,240,255,0.10) 1px, transparent 0);
             background-size: 40px 40px;
             background-position: 0 0, 20px 20px;
-            top: -50%;
-            left: -50%;
-            animation: backgroundMove 30s linear infinite;
+            top: -50%; left: -50%;
+            animation: bgMove 30s linear infinite;
+        }
+        @keyframes bgMove {
+            from { transform: translate(0,0); }
+            to   { transform: translate(40px,40px); }
         }
 
-        @keyframes backgroundMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(40px, 40px); }
-        }
-
-        /* Conteneur principal */
+        /* ─── Conteneur ──────────────────────────────────────────────── */
         .container {
             width: 100%;
-            max-width: 480px;
-            padding: 40px 20px;
+            max-width: 500px;
             text-align: center;
-            z-index: 1;
         }
 
-        /* Profil / En-tête */
+        /* ─── En-tête Profil ─────────────────────────────────────────── */
         .profile-header {
-            margin-bottom: 35px;
+            margin-bottom: 30px;
             animation: fadeInDown 1.2s ease-out;
         }
-
         .avatar-wrapper {
             position: relative;
-            width: 130px;
-            height: 130px;
+            width: 130px; height: 130px;
             margin: 0 auto 20px;
         }
-
         .avatar {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid transparent;
-            background-image: linear-gradient(var(--bg-color), var(--bg-color)), linear-gradient(45deg, var(--primary-glow), var(--secondary-glow));
+            background-image:
+                linear-gradient(var(--bg-color), var(--bg-color)),
+                linear-gradient(45deg, var(--primary-glow), var(--secondary-glow));
             background-origin: border-box;
             background-clip: padding-box, border-box;
-            box-shadow: 0 0 25px rgba(255, 0, 127, 0.4);
-            position: relative;
-            z-index: 2;
+            box-shadow: 0 0 25px rgba(255,0,127,0.4);
+            position: relative; z-index: 2;
         }
-
         .avatar-glow {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             border-radius: 50%;
             background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow));
             filter: blur(15px);
-            opacity: 0.6;
-            z-index: 1;
+            opacity: 0.6; z-index: 1;
             animation: pulseGlow 3s ease-in-out infinite alternate;
         }
-
         @keyframes pulseGlow {
-            0% { transform: scale(0.95); opacity: 0.4; }
+            0%   { transform: scale(0.95); opacity: 0.4; }
             100% { transform: scale(1.05); opacity: 0.8; }
         }
-
         .username {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
+            font-size: 1.8rem; font-weight: 700;
             letter-spacing: 2px;
             background: linear-gradient(45deg, #fff, #a5a6bc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(255,255,255,0.1);
         }
-
         .tagline {
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             color: #8a8b9c;
-            margin-top: 5px;
+            margin-top: 6px;
             letter-spacing: 1px;
         }
 
-        /* Grille des boutons de réseaux sociaux */
+        /* ─── Navigation Onglets ─────────────────────────────────────── */
+        .tab-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 28px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 6px;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 12px 8px;
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            color: #8a8b9c;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            letter-spacing: 0.3px;
+        }
+        .tab-btn i { font-size: 0.95rem; }
+        .tab-btn:hover:not(.active) {
+            color: #cccccc;
+            background: rgba(255,255,255,0.05);
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg,
+                rgba(255,0,127,0.18),
+                rgba(0,240,255,0.18));
+            border-color: rgba(255,0,127,0.35);
+            color: #ffffff;
+            box-shadow: 0 0 14px rgba(255,0,127,0.2);
+        }
+
+        /* ─── Contenus des onglets ───────────────────────────────────── */
+        .tab-content { display: none; }
+        .tab-content.active {
+            display: block;
+            animation: fadeInUp 0.4s ease-out;
+        }
+
+        /* ─── Onglet 1 : Liens Réseaux Sociaux ──────────────────────── */
         .links-grid {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 14px;
         }
-
         .link-item {
             display: flex;
             align-items: center;
@@ -155,156 +181,368 @@
             text-decoration: none;
             color: var(--text-color);
             font-weight: 600;
-            font-size: 1.05rem;
+            font-size: 1.02rem;
+            cursor: pointer;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease-out forwards;
         }
-
-        /* Animation décalée pour chaque bouton */
-        .link-item:nth-child(1) { animation-delay: 0.2s; --item-color: #000000; --glow: rgba(0,0,0,0.5); }
-        .link-item:nth-child(2) { animation-delay: 0.3s; --item-color: #ff0000; --glow: rgba(255,0,0,0.4); }
-        .link-item:nth-child(3) { animation-delay: 0.4s; --item-color: #0088cc; --glow: rgba(0,136,204,0.4); }
-        .link-item:nth-child(4) { animation-delay: 0.5s; --item-color: #25d366; --glow: rgba(37,211,102,0.4); }
-        .link-item:nth-child(5) { animation-delay: 0.6s; --item-color: #1877f2; --glow: rgba(24,119,242,0.4); }
-        .link-item:nth-child(6) { animation-delay: 0.7s; --item-color: #e1306c; --glow: rgba(225,48,108,0.4); }
-        .link-item:nth-child(7) { animation-delay: 0.8s; --item-color: #34a853; --glow: rgba(52,168,83,0.4); }
-
         .link-item i {
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             width: 30px;
             text-align: left;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, color 0.3s ease;
         }
-
         .link-item span {
             flex-grow: 1;
             text-align: center;
-            margin-right: 30px; /* Aligner parfaitement le texte au centre */
+            margin-right: 30px;
             letter-spacing: 0.5px;
         }
 
-        /* Effets au Survol (Hover) */
+        /* Couleurs par réseau */
+        .link-tiktok    { --ic: #00f0ff; --gl: rgba(0,240,255,0.35); }
+        .link-youtube   { --ic: #ff3333; --gl: rgba(255,50,50,0.35); }
+        .link-telegram  { --ic: #2aabee; --gl: rgba(42,171,238,0.35); }
+        .link-whatsapp  { --ic: #25d366; --gl: rgba(37,211,102,0.35); }
+        .link-facebook  { --ic: #1877f2; --gl: rgba(24,119,242,0.35); }
+        .link-instagram { --ic: #e1306c; --gl: rgba(225,48,108,0.35); }
+        .link-gplay     { --ic: #34a853; --gl: rgba(52,168,83,0.35); }
+        .link-snapchat  { --ic: #fffc00; --gl: rgba(255,252,0,0.35); }
+
         .link-item:hover {
             transform: scale(1.03);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--item-color);
-            box-shadow: 0 0 20px var(--glow);
+            background: rgba(255,255,255,0.07);
+            border-color: var(--ic);
+            box-shadow: 0 0 20px var(--gl);
         }
-
         .link-item:hover i {
             transform: scale(1.2);
-            color: var(--item-color);
+            color: var(--ic);
         }
 
-        /* Style spécifique pour TikTok car fond noir par défaut survolé en couleur TikTok */
-        .link-item:nth-child(1):hover {
-            border-color: #00f0ff;
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3), 0 0 20px rgba(255, 0, 127, 0.3);
+        /* ─── Onglet 2 : Événements ──────────────────────────────────── */
+
+        /* Titre de section */
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 3px;
+            color: #8a8b9c;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title::before,
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(255,255,255,0.15),
+                transparent);
+        }
+        .section-title i { color: var(--primary-glow); font-size: 0.9rem; }
+
+        /* Grille de cards compétitions */
+        .event-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 32px;
         }
 
-        /* Keyframes Animations */
+        /* Card compétition */
+        .event-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text-color);
+            display: block;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+        }
+        .event-card:hover {
+            transform: scale(1.02);
+            border-color: var(--primary-glow);
+            box-shadow: 0 0 22px rgba(255,0,127,0.3);
+        }
+        .event-card-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            display: block;
+        }
+        .event-img-placeholder {
+            width: 100%;
+            height: 160px;
+            background: linear-gradient(135deg,
+                rgba(255,0,127,0.12),
+                rgba(0,240,255,0.12));
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: rgba(255,255,255,0.2);
+        }
+        .event-card-body {
+            padding: 16px 18px 18px;
+            text-align: left;
+        }
+        .event-card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 700;
+            margin-bottom: 7px;
+            background: linear-gradient(45deg, #fff, #b0b1c8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .event-card-desc {
+            font-size: 0.82rem;
+            color: #8a8b9c;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .event-card-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--secondary-glow);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Card Chat Communautaire */
+        .chat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        .chat-card-img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            display: block;
+        }
+        .chat-card-body {
+            padding: 20px;
+            text-align: left;
+        }
+        .chat-card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--secondary-glow);
+            letter-spacing: 1px;
+        }
+        .chat-card-text {
+            font-size: 0.84rem;
+            color: #a0a1b0;
+            line-height: 1.75;
+            margin-bottom: 18px;
+        }
+        .chat-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 22px;
+            background: linear-gradient(135deg,
+                rgba(0,240,255,0.12),
+                rgba(255,0,127,0.12));
+            border: 1px solid rgba(0,240,255,0.3);
+            border-radius: 12px;
+            color: var(--secondary-glow);
+            text-decoration: none;
+            font-size: 0.84rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.4px;
+        }
+        .chat-btn:hover {
+            background: linear-gradient(135deg,
+                rgba(0,240,255,0.22),
+                rgba(255,0,127,0.22));
+            box-shadow: 0 0 16px rgba(0,240,255,0.3);
+        }
+
+        /* ─── Keyframes ──────────────────────────────────────────────── */
         @keyframes fadeInDown {
-            0% { opacity: 0; transform: translateY(-30px); }
-            100% { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(-30px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes fadeInUp {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive Mobile optimize */
+        /* ─── Responsive ─────────────────────────────────────────────── */
         @media (max-width: 400px) {
-            .username { font-size: 1.5rem; }
-            .link-item { padding: 14px 20px; font-size: 0.95rem; }
+            .username     { font-size: 1.45rem; }
+            .link-item    { padding: 14px 18px; font-size: 0.95rem; }
+            .tab-btn      { font-size: 0.75rem; padding: 10px 6px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-animate"></div>
+<div class="bg-animate"></div>
 
-    <div class="container">
-        
-        <header class="profile-header">
-            <div class="avatar-wrapper">
-                <img src="https://i.ibb.co/HLGHY12Z/Kiddo.webp" alt="キKiddoシ Profile" class="avatar">
-                <div class="avatar-glow"></div>
-            </div>
-            <h1 class="username">キKiddoシ</h1>
-            <p class="tagline">Retrouvez-moi sur tous mes réseaux ! 🎮🔥</p>
-        </header>
+<div class="container">
 
-        <main class="links-grid">
-            
-            <a href="https://www.tiktok.com/@kiddo_gamplay?_r=1&_t=ZS-97hckWffTBR" target="_blank" class="link-item">
+    <!-- ================================================================
+         EN-TÊTE PROFIL
+    ================================================================ -->
+    <header class="profile-header">
+        <div class="avatar-wrapper">
+
+            <!-- ════════════════════════════════════════════════════════
+                 🖼️  AVATAR
+                 Remplacez l'URL entre les guillemets de src=""
+            ════════════════════════════════════════════════════════ -->
+            <img src="https://i.ibb.co/HLGHY12Z/Kiddo.webp"
+                 alt="キKiddoシ" class="avatar">
+
+            <div class="avatar-glow"></div>
+        </div>
+
+        <h1 class="username">キKiddoシ</h1>
+
+        <!-- ════════════════════════════════════════════════════════
+             ✏️  TAGLINE
+             Modifiez le texte ci-dessous
+        ════════════════════════════════════════════════════════ -->
+        <p class="tagline">Retrouvez-moi sur tous mes réseaux ! 🎮🔥</p>
+    </header>
+
+    <!-- ================================================================
+         NAVIGATION ONGLETS
+    ================================================================ -->
+    <nav class="tab-nav">
+        <button class="tab-btn active" id="btn-social" onclick="switchTab('social')">
+            <i class="fas fa-users"></i> Réseaux Sociaux
+        </button>
+        <button class="tab-btn" id="btn-events" onclick="switchTab('events')">
+            <i class="fas fa-bolt"></i> Événements
+        </button>
+    </nav>
+
+    <!-- ================================================================
+         ONGLET 1 — RÉSEAUX SOCIAUX
+    ================================================================ -->
+    <div class="tab-content active" id="tab-social">
+        <div class="links-grid">
+
+            <!-- ════════════════════════════════════════════════════════
+                 🔗  TIKTOK — Remplacez l'URL dans href=""
+            ════════════════════════════════════════════════════════ -->
+            <a href="https://www.tiktok.com/@kiddo_gamplay?_r=1&_t=ZS-97hckWffTBR"
+               target="_blank" class="link-item link-tiktok">
                 <i class="fab fa-tiktok"></i>
                 <span>TikTok</span>
             </a>
 
-            <a href="https://youtube.com/@kiddo_gamplay?si=RmeSYLyUSfaXWprB" target="_blank" class="link-item">
+            <!-- ════════════════════════════════════════════════════════
+                 🔗  YOUTUBE — Remplacez l'URL dans href=""
+            ════════════════════════════════════════════════════════ -->
+            <a href="https://youtube.com/@kiddo_gamplay?si=RmeSYLyUSfaXWprB"
+               target="_blank" class="link-item link-youtube">
                 <i class="fab fa-youtube"></i>
                 <span>YouTube</span>
             </a>
 
-            <a href="https://t.me/KiddoGamplay" target="_blank" class="link-item">
+            <!-- ════════════════════════════════════════════════════════
+                 🔗  TELEGRAM — Remplacez l'URL dans href=""
+            ════════════════════════════════════════════════════════ -->
+            <a href="https://t.me/KiddoGamplay"
+               target="_blank" class="link-item link-telegram">
                 <i class="fab fa-telegram-plane"></i>
                 <span>Telegram</span>
             </a>
 
-            <a href="https://www.whatsapp.com/channel/0029VbCF1Ux4CrfalXO1Yh2Z" target="_blank" class="link-item">
+            <!-- ════════════════════════════════════════════════════════
+                 🔗  WHATSAPP — Remplacez l'URL dans href=""
+            ════════════════════════════════════════════════════════ -->
+            <a href="https://www.whatsapp.com/channel/0029VbCF1Ux4CrfalXO1Yh2Z"
+               target="_blank" class="link-item link-whatsapp">
                 <i class="fab fa-whatsapp"></i>
                 <span>WhatsApp</span>
             </a>
 
-            <a href="https://www.facebook.com/profile.php?id=61577173139608" target="_blank" class="link-item">
+            <!-- ════════════════════════════════════════════════════════
+                 🔗  FACEBOOK — Remplacez l'URL dans href=""
+            ════════════════════════════════════════════════════════ -->
+            <a href="https://www.facebook.com/profile.php?id=61577173139608"
+               target="_blank" class="link-item link-facebook">
                 <i class="fab fa-facebook-f"></i>
                 <span>Facebook</span>
             </a>
 
-            <a href="https://www.instagram.com/kiddo_gamplay?igsh=ZHF3bHhqaXJyZnQ=" target="_blank" class="link-item">
+            <!-- ════════════════════════════════════════════════════════
+                 🔗  INSTAGRAM — Remplacez l'URL dans href=""
+            ════════════════════════════════════════════════════════ -->
+            <a href="https://www.instagram.com/kiddo_gamplay?igsh=ZHF3bHhqaXJyZnQ="
+               target="_blank" class="link-item link-instagram">
                 <i class="fab fa-instagram"></i>
                 <span>Instagram</span>
             </a>
 
-            <a href="https://my.play/キKiddoシ" target="_blank" class="link-item">
+            <!-- ════════════════════════════════════════════════════════
+                 🔗  GOOGLE PLAY — Remplacez l'URL dans href=""
+            ════════════════════════════════════════════════════════ -->
+            <a href="https://my.play/キKiddoシ"
+               target="_blank" class="link-item link-gplay">
                 <i class="fab fa-google-play"></i>
                 <span>Google Play</span>
             </a>
 
-        </main>
+            <!-- ════════════════════════════════════════════════════════
+                 🔗  SNAPCHAT — Remplacez l'URL dans href=""
+            ════════════════════════════════════════════════════════ -->
+            <a href="https://www.snapchat.com/add/kiddo_snap01"
+               target="_blank" class="link-item link-snapchat">
+                <i class="fab fa-snapchat-ghost"></i>
+                <span>Snapchat</span>
+            </a>
+
+        </div>
     </div>
 
-    <!-- Élément audio pour l'effet de clic -->
-    <audio id="clickSound" preload="auto">
-        <source src="https://www.directfiles.link/9HQDH5HHH/floraphonic-arcade-ui-6-229503.mp3" type="audio/mpeg">
-    </audio>
+    <!-- ================================================================
+         ONGLET 2 — ÉVÉNEMENTS
+    ================================================================ -->
+    <div class="tab-content" id="tab-events">
 
-    <script>
-        const clickSound = document.getElementById("clickSound");
-        clickSound.volume = 0.4; // Ajustement du volume pour l'audio en ligne
+        <!-- ─── SECTION : COMPÉTITIONS ──────────────────────────────── -->
+        <div class="section-title">
+            <i class="fas fa-trophy"></i> Compétitions
+        </div>
 
-        document.querySelectorAll(".link-item").forEach(button => {
-            button.addEventListener("click", function(e) {
-                e.preventDefault();
+        <div class="event-grid">
 
-                const url = this.href;
-
-                clickSound.currentTime = 0;
-                clickSound.play().catch(() => {});
-
-                setTimeout(() => {
-                    window.open(url, "_blank", "noopener,noreferrer");
-                }, 150);
-            });
-        });
-    </script>
-
-</body>
-</html>
+            <!-- ════════════════════════════════════════════════════════
+                 🏆  COMPÉTITION #1
+                 ► href=""        → lien qui s'ouvre au clic
+                 ► src=""         → URL de l'image (bannière)
+                 ► event-card-title  → titre affiché
+                 ► event-card-desc   → description affichée
+            ════════════════════════════════════════════════════════ -->
+            <a class="event-card"
+               href="https://leagues.withgoogle.com/fr/free-fire/leaderboard/"
+               target="_blank">
+                <img class="event-card-img"
+         
