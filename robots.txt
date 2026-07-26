@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kiddogamplay.vercel.app/sitemap.xml
