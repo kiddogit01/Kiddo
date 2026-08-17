@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <script src="https://quge5.com/88/tag.min.js" data-zone="266466" async data-cfasync="false"></script>
+    <script defer src="anti-adblock.js"></script>
+    <title>FIFA 26 (Mode) — Téléchargement & Tuto | キKiddoシ</title>
+    <meta name="description" content="Téléchargez FIFA 26 (Mode) : application, fichier data, fichier obb, et suivez le tutoriel d'installation étape par étape.">
+    <link rel="icon" type="image/png" href="https://files.catbox.moe/v4syx8.webp">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    </noscript>
+    <style>
+        :root {
+            --bg-color:       #0d0e15;
+            --card-bg:        rgba(255, 255, 255, 0.03);
+            --border-color:   rgba(255, 255, 255, 0.08);
+            --text-color:     #ffffff;
+            --primary-glow:   #ff007f;
+            --secondary-glow: #00f0ff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 0 0 60px;
+        }
+        .bg-animate {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #1a1c29 0%, #0d0e15 100%);
+        }
+        .top-bar {
+            display: flex; align-items: center; gap: 14px;
+            padding: 18px 20px; border-bottom: 1px solid var(--border-color);
+            position: sticky; top: 0; background: rgba(13,14,21,0.85);
+            backdrop-filter: blur(12px); z-index: 50;
+        }
+        .back-btn {
+            width: 38px; height: 38px; border-radius: 50%;
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border-color);
+            color: var(--text-color); display: flex; align-items: center; justify-content: center;
+            text-decoration: none; flex-shrink: 0; transition: all 0.3s ease;
+        }
+        .back-btn:hover { background: rgba(255,255,255,0.12); }
+        .top-bar-title { font-family: 'Orbitron', sans-serif; font-size: 0.95rem; letter-spacing: 1px; }
+
+        .container { max-width: 560px; margin: 0 auto; padding: 24px 20px 0; }
+
+        .game-title {
+            font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 700;
+            background: linear-gradient(45deg, #fff, #a5a6bc);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 16px; text-align: center;
+        }
+
+        /* Cadre haut — couverture du jeu */
+        .video-frame {
+            position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 16px;
+            overflow: hidden; box-shadow: 0 8px 26px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-color); margin-bottom: 30px;
+        }
+        .video-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif; font-size: 0.8rem;
+            letter-spacing: 2.5px; color: #8a8b9c; text-transform: uppercase;
+            margin: 30px 0 16px; display: flex; align-items: center; gap: 10px;
+        }
+        .section-title::before, .section-title::after {
+            content: ''; flex: 1; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+        }
+        .section-title i { color: var(--primary-glow); font-size: 0.9rem; }
+
+        /* Étapes */
+        .step-card {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 16px; padding: 20px; margin-bottom: 16px;
+            backdrop-filter: blur(10px);
+        }
+        .step-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+        .step-num {
+            width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+            background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow));
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 0.9rem; color: #06111c;
+        }
+        .step-title { font-weight: 700; font-size: 1rem; }
+
+        .step-btn {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            width: 100%; padding: 13px; border-radius: 12px; border: none;
+            background: linear-gradient(135deg, rgba(0,240,255,0.18), rgba(255,0,127,0.18));
+            border: 1px solid rgba(0,240,255,0.35); color: var(--secondary-glow);
+            font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.9rem;
+            text-decoration: none; cursor: pointer; transition: all 0.3s ease;
+        }
+        .step-btn:hover { background: linear-gradient(135deg, rgba(0,240,255,0.3), rgba(255,0,127,0.3)); box-shadow: 0 0 16px rgba(0,240,255,0.3); }
+
+        /* Étape 4 — tuto vidéo en cours de création */
+        .tuto-video-box {
+            position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 12px;
+            overflow: hidden; display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #1a1c29, #0d0e15);
+            border: 2px solid #ff3333;
+            animation: redPulseBorder 2.2s ease-in-out infinite alternate;
+        }
+        @keyframes redPulseBorder {
+            0%   { box-shadow: 0 0 8px rgba(255,50,50,0.25); }
+            100% { box-shadow: 0 0 22px rgba(255,50,50,0.6); }
+        }
+        .tuto-video-box i { font-size: 2.2rem; color: rgba(255,255,255,0.15); }
+        .tuto-overlay {
+            position: absolute; inset: 0; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 8px;
+            background: rgba(10,11,17,0.72); text-align: center; padding: 16px;
+        }
+        .tuto-overlay i.warn-icon { font-size: 1.4rem; color: #ff4444; }
+        .tuto-overlay span { font-weight: 700; font-size: 0.9rem; color: #ff6b6b; }
+
+        /* Note finale */
+        .final-note {
+            display: flex; align-items: flex-start; gap: 10px;
+            background: rgba(255, 152, 0, 0.08); border: 1px solid rgba(255, 152, 0, 0.3);
+            border-radius: 12px; padding: 14px 16px; margin: 26px 0; font-size: 0.85rem;
+            color: #ffcc80; line-height: 1.5;
+        }
+        .final-note i { color: #ff9800; margin-top: 2px; }
+
+        /* Tableau caractéristiques */
+        .specs-table {
+            width: 100%; border-collapse: collapse; overflow: hidden;
+            border-radius: 14px; border: 1px solid var(--border-color);
+        }
+        .specs-table th {
+            background: linear-gradient(135deg, rgba(255,0,127,0.15), rgba(0,240,255,0.15));
+            font-family: 'Orbitron', sans-serif; font-size: 0.78rem; letter-spacing: 1px;
+            text-transform: uppercase; padding: 14px; text-align: left; color: var(--secondary-glow);
+        }
+        .specs-table td {
+            padding: 13px 14px; border-top: 1px solid var(--border-color);
+            font-size: 0.88rem; background: var(--card-bg);
+        }
+        .specs-table td:first-child { color: #8a8b9c; width: 45%; }
+        .specs-table td:last-child { font-weight: 700; }
+        .specs-note { display: block; margin-top: 3px; font-size: 0.72rem; font-weight: 400; color: #8a8b9c; }
+
+        /* Popup pub forcée — retour après clic téléchargement */
+        .ad-popup-overlay {
+            position: fixed; inset: 0; z-index: 5000;
+            background: rgba(0,0,0,0.86); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            display: none; align-items: center; justify-content: center; padding: 20px;
+        }
+        .ad-popup-overlay.show { display: flex; }
+        .ad-popup-box {
+            background: linear-gradient(135deg, #13141f, #1a1c2e);
+            border: 1px solid rgba(0,240,255,0.25); border-radius: 22px;
+            padding: 28px 22px; max-width: 320px; width: 100%; text-align: center;
+            box-shadow: 0 0 40px rgba(0,240,255,0.12), 0 20px 60px rgba(0,0,0,0.6);
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes popIn { from { transform: scale(0.75); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .ad-countdown-ring {
+            width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 16px;
+            display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, rgba(255,0,127,0.15), rgba(0,240,255,0.15));
+            border: 2px solid var(--secondary-glow);
+            font-family: 'Orbitron', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--secondary-glow);
+        }
+        .ad-popup-label { font-weight: 700; font-size: 0.92rem; margin-bottom: 4px; }
+        .ad-popup-sub { font-size: 0.78rem; color: #8a8b9c; margin-bottom: 4px; line-height: 1.5; }
+    </style>
+</head>
+<body>
+
+<div class="bg-animate"></div>
+
+<div class="top-bar">
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+    <div class="top-bar-title">キKiddoシ</div>
+</div>
+
+<div class="container">
+
+    <h1 class="game-title">FIFA 26 (Mode)</h1>
+
+    <!-- Couverture du jeu -->
+    <div class="video-frame">
+        <img src="https://files.catbox.moe/v4syx8.webp" alt="FIFA 26 (Mode)"
+             onerror="this.style.display='none';">
+    </div>
+
+    <div class="section-title"><i class="fas fa-list-check"></i> Tutoriel d'installation</div>
+
+    <!-- Étape 1 -->
+    <div class="step-card">
+        <div class="step-head">
+            <div class="step-num">1</div>
+            <div class="step-title">Télécharger l'application</div>
+        </div>
+        <a class="step-btn" id="btn-app"
+           href="https://www.mediafire.com/file/lvwxo5nwccxe8yr/APK_FC26%25E2%2584%25A2_ANDROID_OFFLINE_BY_ALPHATRIX_GAMING.zip/file">
+            <i class="fas fa-download"></i> Télécharger l'application
+        </a>
+    </div>
+
+    <!-- Étape 2 -->
+    <div class="step-card">
+        <div class="step-head">
+            <div class="step-num">2</div>
+            <div class="step-title">Télécharger le fichier Data</div>
+        </div>
+        <a class="step-btn" id="btn-data"
+           href="https://www.mediafire.com/file/bnjv1w94nbmpx8a/DATA_FC27_BY_THORK_9INE.zip/file?dkey=jx6d4or6ehn&r=692">
+            <i class="fas fa-download"></i> Télécharger le fichier Data
+        </a>
+    </div>
+
+    <!-- Étape 3 -->
+    <div class="step-card">
+        <div class="step-head">
+            <div class="step-num">3</div>
+            <div class="step-title">Télécharger le fichier Obb</div>
+        </div>
+        <a class="step-btn" id="btn-obb"
+           href="https://www.mediafire.com/file/r7qqwy5h2gdf2pt/OBB+FIFA+16+MOBILE.zip/file">
+            <i class="fas fa-download"></i> Télécharger le fichier Obb
+        </a>
+    </div>
+
+    <!-- Étape 4 -->
+    <div class="step-card">
+        <div class="step-head">
+            <div class="step-num">4</div>
+            <div class="step-title">Suivre ce tutoriel</div>
+        </div>
+        <div class="tuto-video-box">
+            <i class="fas fa-clapperboard"></i>
+            <div class="tuto-overlay">
+                <i class="fas fa-triangle-exclamation warn-icon"></i>
+                <span>Tutoriel en cours de création 🚧</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="final-note">
+        <i class="fas fa-circle-info"></i>
+        <div>Téléchargez bien les 3 fichiers (application, data, obb) et suivez le tutoriel pour une installation réussie.</div>
+    </div>
+
+    <div class="section-title"><i class="fas fa-microchip"></i> Caractéristiques recommandées</div>
+
+    <table class="specs-table">
+        <tr><th colspan="2">Configuration minimale</th></tr>
+        <tr><td>Processeur</td><td>Mediatek Helio G95<span class="specs-note">Un processeur moyen de gamme suffit largement</span></td></tr>
+        <tr><td>Version Android</td><td>Android 11</td></tr>
+        <tr><td>RAM</td><td>8 Go</td></tr>
+    </table>
+
+</div>
+
+<!-- Son de clic (identique au reste du site) -->
+<audio id="snd-click" preload="none">
+    <source src="https://files.catbox.moe/3nb7qv.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ============================================================
+     🎯 POPUP PUB FORCÉE — retour après clic téléchargement
+     (pas de bouton fermer, se ferme seule après 10s)
+============================================================ -->
+<div class="ad-popup-overlay" id="ad-popup">
+    <div class="ad-popup-box">
+        <div class="ad-countdown-ring" id="ad-countdown">10</div>
+        <div class="ad-popup-label" id="ad-popup-label">Votre téléchargement est prêt 📥</div>
+        <div class="ad-popup-sub" id="ad-popup-sub">Merci de patienter quelques secondes...</div>
+    </div>
+</div>
+
+<script>
+    const sndClick = document.getElementById('snd-click');
+    sndClick.volume = 0.4;
+    function playClick() { sndClick.currentTime = 0; sndClick.play().catch(() => {}); }
+
+    /* ---------- Pub forcée (avant ouverture du lien + au retour) ---------- */
+    const adPopup = document.getElementById('ad-popup');
+    const adCountdown = document.getElementById('ad-countdown');
+    const adPopupLabel = document.getElementById('ad-popup-label');
+    const adPopupSub = document.getElementById('ad-popup-sub');
+    let awaitingAdReturn = false;
+    let adCountdownInterval = null;
+
+    function injectMonetagVignette() {
+        (function(s){ s.dataset.zone='11564383'; s.src='https://n6wxm.com/vignette.min.js'; })(
+            [document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script'))
+        );
+    }
+
+    function showAdPopup(seconds, label, sub, onComplete) {
+        let remaining = seconds;
+        adCountdown.textContent = remaining;
+        adPopupLabel.textContent = label;
+        adPopupSub.textContent = sub;
+        adPopup.classList.add('show');
+        injectMonetagVignette();
+
+        clearInterval(adCountdownInterval);
+        adCountdownInterval = setInterval(() => {
+            remaining--;
+            adCountdown.textContent = remaining > 0 ? remaining : 0;
+            if (remaining <= 0) {
+                clearInterval(adCountdownInterval);
+                adPopup.classList.remove('show');
+                if (onComplete) onComplete();
+            }
+        }, 1000);
+    }
+
+    // Détecte le retour sur l'onglet après un clic téléchargement (nouvel onglet fermé / quitté)
+    document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'visible' && awaitingAdReturn) {
+            awaitingAdReturn = false;
+            showAdPopup(10, 'Votre téléchargement est prêt 📥', 'Merci de patienter quelques secondes...');
+        }
+    });
+
+    // Clic téléchargement : popup 15s (avec pub) puis ouverture automatique du lien
+    document.querySelectorAll('.step-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const url = this.href;
+            playClick();
+            showAdPopup(15, 'Redirection automatique 🔄', 'Vous serez redirigé automatiquement vers le lien de téléchargement.', () => {
+                window.open(url, '_blank', 'noopener,noreferrer');
+                awaitingAdReturn = true;
+            });
+        });
+    });
+    document.querySelector('.back-btn').addEventListener('click', function(e) {
+        playClick();
+    });
+
+    // 📢 Enregistrement du service worker Monetag (sw.js à la racine du repo)
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+    }
+</script>
+
+</body>
+</html>
