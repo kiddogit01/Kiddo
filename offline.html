@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Hors connexion — キKiddoシ</title>
+  <style type="text/css">
+    :root {
+      --bg-color: #0d0e15;
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --text-color: #ffffff;
+      --muted: #8a8b9c;
+      --primary-glow: #ff007f;
+      --secondary-glow: #00f0ff;
+    }
+    /* Le site Kiddo est en thème sombre uniquement : on garde le même
+       rendu quelle que soit la préférence système, pour rester cohérent
+       avec le reste du site. */
+    [data-theme="dark"], [data-theme="light"] {
+      --bg-color: #0d0e15;
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --text-color: #ffffff;
+      --muted: #8a8b9c;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { background-color: var(--bg-color) !important; height: 100%; }
+    html, body, button { font-family: Arial, Helvetica, sans-serif; -webkit-tap-highlight-color: transparent; }
+    body {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; padding: 24px;
+      background: radial-gradient(circle at 50% 38%, #1a1c29 0%, #0d0e15 70%);
+    }
+    .container { color: var(--text-color); text-align: center; max-width: 320px; width: 100%; }
+
+    .wordmark {
+      font-size: 1.7rem; font-weight: 900; letter-spacing: 1px; margin-bottom: 36px;
+    }
+    .wordmark .accent { color: var(--secondary-glow); }
+
+    .icon-badge {
+      width: 88px; height: 88px; border-radius: 50%; margin: 0 auto 24px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, rgba(255,0,127,0.16), rgba(0,240,255,0.16));
+      border: 2px solid var(--secondary-glow);
+      box-shadow: 0 0 26px rgba(0,240,255,0.22);
+    }
+    .icon-badge svg { color: var(--secondary-glow); display: block; }
+
+    h1 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; line-height: 1.4; }
+    p { font-size: 0.92rem; color: var(--muted); line-height: 1.55; margin-bottom: 30px; }
+
+    button {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 13px 32px; border-radius: 12px;
+      border: 1px solid rgba(0,240,255,0.35);
+      background: linear-gradient(135deg, rgba(0,240,255,0.18), rgba(255,0,127,0.18));
+      color: var(--secondary-glow); font-size: 0.95rem; font-weight: 700;
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    button:active { transform: scale(0.96); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="wordmark">キKiddo<span class="accent">シ</span></div>
+
+    <div class="icon-badge">
+      <!-- Icône Wi-Fi barré (SVG intégré, aucune dépendance externe) -->
+      <svg width="38" height="38" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L23 23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M10.71 5.05A16 16 0 0 1 22.58 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M8.53 16.11a6 6 0 0 1 6.95 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="12" cy="20" r="1" fill="currentColor"/>
+      </svg>
+    </div>
+
+    <span id="message">
+      <h1>Pas de connexion internet</h1>
+      <p>Vérifiez votre connexion puis réessayez.</p>
+    </span>
+
+    <button id="retryButton" type="button" onclick="reloadApp()">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 12a9 9 0 1 1-3.5-7.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M21 3v6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Réessayer
+    </button>
+  </div>
+
+  <script>
+    // Median.co (anciennement GoNative) : on tente median en priorité,
+    // avec repli sur gonative (compatibilité), puis rechargement classique
+    // si la page est simplement ouverte dans un navigateur normal.
+    function reloadApp() {
+      if (window.median && median.webview && median.webview.reload) {
+        median.webview.reload();
+      } else if (window.gonative && gonative.webview && gonative.webview.reload) {
+        gonative.webview.reload();
+      } else {
+        window.location.reload();
+      }
+    }
+
+    // Conservé pour compatibilité avec le mécanisme GoNative, même si le
+    // thème visuel reste identique (Kiddo est en sombre uniquement).
+    function updateDarkMode(){
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      } else {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    }
+    updateDarkMode();
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)')
+        .addEventListener('change', updateDarkMode);
+    }
+  </script>
+</body>
+</html>
