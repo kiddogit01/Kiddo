@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+
+  <url>
+    <loc>https://kiddogamplay.vercel.app/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://kiddogamplay.vercel.app/Kiddo_Services.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://kiddogamplay.vercel.app/Concours_MrGamingPro.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://kiddogamplay.vercel.app/gta5.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/z93m06A5Q4w/hqdefault.jpg</video:thumbnail_loc>
+      <video:title>Tutoriel d'installation GTA V</video:title>
+      <video:description>Tutoriel complet pour installer Grand Theft Auto V (GTA 5) sur Android.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/z93m06A5Q4w</video:player_loc>
+    </video:video>
+  </url>
+
+  <url>
+    <loc>https://kiddogamplay.vercel.app/gta4.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/z93m06A5Q4w/hqdefault.jpg</video:thumbnail_loc>
+      <video:title>Tutoriel d'installation GTA IV</video:title>
+      <video:description>Tutoriel complet pour installer Grand Theft Auto IV (GTA 4) sur Android.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/z93m06A5Q4w</video:player_loc>
+    </video:video>
+  </url>
+
+  <url>
+    <loc>https://kiddogamplay.vercel.app/gtasa.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/UmH3yT3sk98/hqdefault.jpg</video:thumbnail_loc>
+      <video:title>GTA San Andreas Definitive Edition — Gameplay</video:title>
+      <video:description>Vidéo gameplay de GTA San Andreas: The Definitive Edition sur mobile.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/UmH3yT3sk98</video:player_loc>
+    </video:video>
+  </url>
+
+  <url>
+    <loc>https://kiddogamplay.vercel.app/blur.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://kiddogamplay.vercel.app/ppsspp.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://kiddogamplay.vercel.app/fifa26.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kiddogamplay.vercel.app/narutostorm.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
