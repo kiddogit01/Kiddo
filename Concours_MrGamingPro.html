@@ -31,6 +31,10 @@
         <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     </noscript>
 
+    <!-- ⚡ Scripts publicité/anti-adblock chargés sans bloquer le rendu de la page -->
+    <script src="https://quge5.com/88/tag.min.js" data-zone="266466" async data-cfasync="false"></script>
+    <script defer src="anti-adblock.js"></script>
+
     <style>
         :root {
             --bg-color:       #0d0e15;
@@ -506,7 +510,7 @@
     <div class="section-title"><i class="fas fa-trophy"></i> Résultats de la sélection</div>
     <button class="results-photo-btn" onclick="openResultsPhoto()" aria-label="Voir la liste des candidats sélectionnés">
         <!-- 🖼️ Liste des candidats sélectionnés -->
-        <img src="Liste des candidats sélectionnés.png" alt="Liste des candidats sélectionnés">
+        <img src="Liste_des_candidats_sélectionnés.png" alt="Liste des candidats sélectionnés">
         <span class="prize-photo-zoom"><i class="fas fa-magnifying-glass-plus"></i></span>
     </button>
     <p style="text-align:center; font-size:0.78rem; color:var(--muted); margin-top:10px; line-height:1.5;">
@@ -517,7 +521,7 @@
     <div class="prize-modal" id="results-modal" onclick="if(event.target===this) closeResultsPhoto()">
         <div class="prize-modal-box">
             <button class="prize-modal-close" onclick="closeResultsPhoto()" aria-label="Fermer"><i class="fas fa-times"></i></button>
-            <img src="Liste des candidats sélectionnés.png" alt="Liste des candidats sélectionnés" class="prize-modal-img">
+            <img src="Liste_des_candidats_sélectionnés.png" alt="Liste des candidats sélectionnés" class="prize-modal-img">
         </div>
     </div>
 
@@ -675,6 +679,14 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+    // ============================================================
+    // 📢 MONETAG — enregistrement du service worker (sw.js doit être
+    //    déposé à la racine du repo GitHub, à côté d'index.html)
+    // ============================================================
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+    }
+
     // ================================================
     // ✏️ CONFIGURATION SUPABASE
     //    L'URL est déjà celle de votre projet "Kiddo Liens Officiels".
