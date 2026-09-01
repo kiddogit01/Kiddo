@@ -177,6 +177,11 @@
             background: rgba(8,9,15,0.85); border: 1px solid rgba(255,255,255,0.25);
             display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #fff;
         }
+        .results-photo-btn {
+            position: relative; display: block; width: 100%; border-radius: 16px; overflow: hidden;
+            border: 2px solid rgba(0,255,136,0.35); background: rgba(0,0,0,0.3); cursor: pointer; padding: 0;
+        }
+        .results-photo-btn img { width: 100%; display: block; }
 
         /* Popup détails */
         .prize-modal {
@@ -417,7 +422,7 @@
         <h1 class="contest-title">キKiddoシ × MR GAMING PRO</h1>
         <p class="contest-sub">Gagne un compte TikTok de 14 000 abonnés en faisant découvrir Kiddo Liens Officiels 🔥</p>
         <div class="status-row">
-            <span class="status-chip progress"><span class="live-dot"></span> Sélection en cours</span>
+            <span class="status-chip"><i class="fas fa-check-circle"></i> Sélection terminée</span>
             <span class="status-chip alt"><i class="fas fa-users"></i> 20 places sélectionnées</span>
         </div>
     </header>
@@ -497,13 +502,24 @@
         <div class="rule-item"><i class="fas fa-check"></i> Un numéro WhatsApp joignable est obligatoire pour confirmer ta sélection.</div>
     </div>
 
-    <!-- CTA SECONDAIRE -->
-    <button class="cta-register secondary" id="cta-bottom" disabled style="opacity:0.5; cursor:not-allowed; background: rgba(255,255,255,0.08); color: var(--muted);">
-        <i class="fas fa-lock"></i> Inscriptions terminées
+    <!-- RÉSULTATS DE LA SÉLECTION -->
+    <div class="section-title"><i class="fas fa-trophy"></i> Résultats de la sélection</div>
+    <button class="results-photo-btn" onclick="openResultsPhoto()" aria-label="Voir la liste des candidats sélectionnés">
+        <!-- 🖼️ Liste des candidats sélectionnés -->
+        <img src="Liste_des_candidats_sélectionnés.png" alt="Liste des candidats sélectionnés">
+        <span class="prize-photo-zoom"><i class="fas fa-magnifying-glass-plus"></i></span>
     </button>
     <p style="text-align:center; font-size:0.78rem; color:var(--muted); margin-top:10px; line-height:1.5;">
-        Les candidatures sont closes. La sélection des 20 participants est en cours — reste connecté(e) pour l'annonce des résultats 👀
+        Félicitations à tous les sélectionnés 🏆 Ton lien de redirection te sera communiqué dès le lancement officiel.
     </p>
+
+    <!-- Popup liste des candidats -->
+    <div class="prize-modal" id="results-modal" onclick="if(event.target===this) closeResultsPhoto()">
+        <div class="prize-modal-box">
+            <button class="prize-modal-close" onclick="closeResultsPhoto()" aria-label="Fermer"><i class="fas fa-times"></i></button>
+            <img src="Liste_des_candidats_sélectionnés.png" alt="Liste des candidats sélectionnés" class="prize-modal-img">
+        </div>
+    </div>
 
     <!-- PARTAGE -->
     <div class="share-card">
@@ -787,7 +803,7 @@
         document.body.style.overflow = '';
     }
 
-    document.getElementById('cta-bottom').addEventListener('click', openWizard);
+    // Bouton d'inscription retiré (concours terminé)
     document.getElementById('wizard-close').addEventListener('click', closeWizard);
     document.getElementById('wizard-done-close').addEventListener('click', closeWizard);
 
@@ -860,8 +876,14 @@
     function closePrizeDetails() {
         document.getElementById('prize-modal').classList.remove('open');
     }
+    function openResultsPhoto() {
+        document.getElementById('results-modal').classList.add('open');
+    }
+    function closeResultsPhoto() {
+        document.getElementById('results-modal').classList.remove('open');
+    }
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closePrizeDetails();
+        if (e.key === 'Escape') { closePrizeDetails(); closeResultsPhoto(); }
     });
 
     async function shareCompetition() {
