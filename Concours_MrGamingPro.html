@@ -181,11 +181,31 @@
             background: rgba(8,9,15,0.85); border: 1px solid rgba(255,255,255,0.25);
             display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #fff;
         }
-        .results-photo-btn {
-            position: relative; display: block; width: 100%; border-radius: 16px; overflow: hidden;
-            border: 2px solid rgba(0,255,136,0.35); background: rgba(0,0,0,0.3); cursor: pointer; padding: 0;
+        .leaderboard { display: flex; flex-direction: column; gap: 10px; }
+        .lb-loading { text-align: center; color: var(--muted); font-size: 0.85rem; padding: 20px 0; }
+        .lb-row {
+            display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 14px;
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            transition: transform 0.4s ease, background 0.4s ease, border-color 0.4s ease;
         }
-        .results-photo-btn img { width: 100%; display: block; }
+        .lb-row.top1 { border-color: rgba(255,176,32,0.5); background: rgba(255,176,32,0.08); }
+        .lb-row.top2 { border-color: rgba(0,240,255,0.4); background: rgba(0,240,255,0.06); }
+        .lb-row.top3 { border-color: rgba(255,0,127,0.35); background: rgba(255,0,127,0.06); }
+        .lb-rank { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1rem; width: 28px; text-align: center; color: var(--muted); flex-shrink: 0; }
+        .lb-row.top1 .lb-rank, .lb-row.top2 .lb-rank, .lb-row.top3 .lb-rank { color: var(--text-color); font-size: 1.15rem; }
+        .lb-photo { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0; background: #1a1b26; }
+        .lb-info { flex: 1; min-width: 0; text-align: left; }
+        .lb-pseudo { font-weight: 700; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .lb-views { display: flex; align-items: center; gap: 5px; font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 0.85rem; color: var(--secondary-glow); flex-shrink: 0; }
+        .lb-live-dot {
+            display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+            box-shadow: 0 0 0 rgba(0,255,136,0.6); animation: lb-pulse 1.6s infinite;
+        }
+        @keyframes lb-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0,255,136,0.6); }
+            70% { box-shadow: 0 0 0 6px rgba(0,255,136,0); }
+            100% { box-shadow: 0 0 0 0 rgba(0,255,136,0); }
+        }
 
         /* Popup détails */
         .prize-modal {
@@ -506,24 +526,14 @@
         <div class="rule-item"><i class="fas fa-check"></i> Un numéro WhatsApp joignable est obligatoire pour confirmer ta sélection.</div>
     </div>
 
-    <!-- RÉSULTATS DE LA SÉLECTION -->
-    <div class="section-title"><i class="fas fa-trophy"></i> Résultats de la sélection</div>
-    <button class="results-photo-btn" onclick="openResultsPhoto()" aria-label="Voir la liste des candidats sélectionnés">
-        <!-- 🖼️ Liste des candidats sélectionnés -->
-        <img src="Liste des candidats sélectionnés.png" alt="Liste des candidats sélectionnés">
-        <span class="prize-photo-zoom"><i class="fas fa-magnifying-glass-plus"></i></span>
-    </button>
-    <p style="text-align:center; font-size:0.78rem; color:var(--muted); margin-top:10px; line-height:1.5;">
-        Félicitations à tous les sélectionnés 🏆 Ton lien de redirection te sera communiqué dès le lancement officiel.
-    </p>
-
-    <!-- Popup liste des candidats -->
-    <div class="prize-modal" id="results-modal" onclick="if(event.target===this) closeResultsPhoto()">
-        <div class="prize-modal-box">
-            <button class="prize-modal-close" onclick="closeResultsPhoto()" aria-label="Fermer"><i class="fas fa-times"></i></button>
-            <img src="Liste des candidats sélectionnés.png" alt="Liste des candidats sélectionnés" class="prize-modal-img">
-        </div>
+    <!-- CLASSEMENT EN DIRECT DES FINALISTES -->
+    <div class="section-title"><i class="fas fa-trophy"></i> Classement en direct</div>
+    <div class="leaderboard" id="leaderboard">
+        <div class="lb-loading">Chargement du classement…</div>
     </div>
+    <p style="text-align:center; font-size:0.78rem; color:var(--muted); margin-top:10px; line-height:1.5;">
+        <span class="lb-live-dot"></span> En direct — le classement se met à jour selon le nombre de vues de chaque finaliste.
+    </p>
 
     <!-- PARTAGE -->
     <div class="share-card">
@@ -888,15 +898,45 @@
     function closePrizeDetails() {
         document.getElementById('prize-modal').classList.remove('open');
     }
-    function openResultsPhoto() {
-        document.getElementById('results-modal').classList.add('open');
-    }
-    function closeResultsPhoto() {
-        document.getElementById('results-modal').classList.remove('open');
-    }
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') { closePrizeDetails(); closeResultsPhoto(); }
+        if (e.key === 'Escape') { closePrizeDetails(); }
     });
+
+    /* ---------- Classement en direct des finalistes ---------- */
+    async function loadLeaderboard() {
+        const { data, error } = await sb
+            .from('finalistes')
+            .select('slug, pseudo, photo_url, views')
+            .order('views', { ascending: false });
+        if (error || !data) return;
+        renderLeaderboard(data);
+    }
+
+    function renderLeaderboard(rows) {
+        const el = document.getElementById('leaderboard');
+        const medals = ['🥇', '🥈', '🥉'];
+        el.innerHTML = rows.map((r, i) => {
+            const rank = i + 1;
+            const topClass = rank <= 3 ? (' top' + rank) : '';
+            const rankDisplay = rank <= 3 ? medals[rank - 1] : rank;
+            const views = (r.views || 0).toLocaleString('fr-FR');
+            return (
+                '<a class="lb-row' + topClass + '" href="' + r.slug + '.html">' +
+                    '<div class="lb-rank">' + rankDisplay + '</div>' +
+                    '<img class="lb-photo" src="' + r.photo_url + '" alt="' + r.pseudo + '" onerror="this.src=\'kiddo-app-icon.png\';">' +
+                    '<div class="lb-info"><div class="lb-pseudo">' + r.pseudo + '</div></div>' +
+                    '<div class="lb-views"><i class="fas fa-eye"></i> ' + views + '</div>' +
+                '</a>'
+            );
+        }).join('');
+    }
+
+    loadLeaderboard();
+
+    // Mise à jour en temps réel dès qu'une vue est comptabilisée
+    sb.channel('finalistes-realtime')
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'finalistes' }, loadLeaderboard)
+        .subscribe();
 
     async function shareCompetition() {
         const shareData = {
