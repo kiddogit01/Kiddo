@@ -16,8 +16,8 @@
     <meta name="google-site-verification" content="dKbOl2ijU_72LGKSe47MTcMc0jco2ZUwh523CfWyE8w" />
 
     <!-- ✅ SEO de base -->
-    <meta name="description" content="キKiddoシ (Kiddo Gamplay) — tous mes réseaux (TikTok, YouTube, Telegram, WhatsApp), téléchargement de jeux Android/PC/console (GTA 5, GTA 4, GTA San Andreas, FIFA 26, BLUR, PPSSPP...) et Kiddo Services, au même endroit.">
-    <meta name="keywords" content="Kiddo, Kiddo Gamplay, kiddo_gamplay, Kiddo Services, Kiddo Liens Officiels, Lv-UP STORE, Game Lv-UP, Kiddo Application, Kiddo site, Kiddo web, Kiddo TikTok, Kiddo Telegram, Kiddo WhatsApp, Kiddo GTA 5, Kiddo GTA 4, jeux PPSSPP, télécharger jeux Android">
+    <meta name="description" content="キKiddoシ (Kiddo Gamplay) — tous mes réseaux (TikTok, YouTube, Telegram, WhatsApp), téléchargement de jeux Android/PC/console (GTA 5, GTA 4, GTA San Andreas, FIFA 26, FIFA 23, BLUR, PPSSPP...) et Kiddo Services, au même endroit.">
+    <meta name="keywords" content="Kiddo, Kiddo Gamplay, kiddo_gamplay, Kiddo Services, Kiddo Liens Officiels, Lv-UP STORE, Game Lv-UP, Kiddo Application, Kiddo site, Kiddo web, Kiddo TikTok, Kiddo Telegram, Kiddo WhatsApp, Kiddo GTA 5, Kiddo GTA 4, Kiddo FIFA 23, jeux PPSSPP, télécharger jeux Android">
     <link rel="canonical" href="https://kiddogamplay.vercel.app/">
 
     <!-- ✅ Données structurées — aide Google à relier la marque à ses différents noms et réseaux -->
@@ -640,14 +640,14 @@
                 <div class="event-img-placeholder"><i class="fas fa-trophy"></i></div>
                 <div class="event-card-body">
                     <span style="display:inline-flex;align-items:center;gap:6px;color:#00ff88;font-weight:700;font-size:0.78rem;margin-bottom:8px;">
-                        <span class="live-dot green"></span> Inscriptions ouvertes
+                        <span class="live-dot green"></span> Compétition en cours
                     </span>
                     <div class="event-card-title">Concours MR GAMING PRO × Kiddo</div>
                     <div class="event-card-desc">
-                        Gagne un compte TikTok de 14 000 abonnés ! 20 places sélectionnées sur dossier — inscris-toi dès maintenant.
+                        Les 9 finalistes s'affrontent pour le compte TikTok de 14 000 abonnés jusqu'au 5 septembre 15h (GMT). Suis le classement en direct.
                     </div>
                     <div class="event-card-cta" style="color: #00ff88;">
-                        <i class="fas fa-arrow-right"></i> Je m'inscris
+                        <i class="fas fa-arrow-right"></i> Voir le classement en direct
                     </div>
                 </div>
             </a>
@@ -685,6 +685,27 @@
                     <div class="event-card-title">BLUR</div>
                     <div class="event-card-desc">
                         Jeu de course arcade nerveux, avec power-ups et courses en équipe. Pied au plancher !
+                    </div>
+                    <div class="event-card-cta" style="color: var(--secondary-glow);">
+                        <i class="fas fa-download"></i> Télécharger
+                    </div>
+                </div>
+            </a>
+
+            <!-- ================================================
+                 📥 EA SPORTS FIFA 23 — Nintendo Switch Legacy Edition
+                 ► Redirige vers une page dédiée (couverture + tuto)
+            ================================================ -->
+            <a class="event-card" id="fifa23-card" href="fifa23.html">
+                <img class="event-card-img" loading="lazy"
+                     src="https://cdn.cloudflare.steamstatic.com/steam/apps/1811260/header.jpg"
+                     alt="EA SPORTS FIFA 23 (Nintendo Switch Legacy Edition)"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="event-img-placeholder"><i class="fas fa-futbol"></i></div>
+                <div class="event-card-body">
+                    <div class="event-card-title">EA SPORTS FIFA 23 (Nintendo Switch)</div>
+                    <div class="event-card-desc">
+                        Le FIFA culte enfin jouable sur Switch (émulé). Constitue ton équipe et affronte les meilleurs joueurs du monde.
                     </div>
                     <div class="event-card-cta" style="color: var(--secondary-glow);">
                         <i class="fas fa-download"></i> Télécharger
@@ -1066,7 +1087,7 @@
     });
 
     // Clic cards compétitions (hors One State)
-    document.querySelectorAll('.event-card:not(#gta5-card):not(#gta4-card):not(#fifa26-card):not(#blur-card):not(#gtasa-card):not(#ppsspp-card):not(#naruto-card):not(#concours-mgp-card)').forEach(card => {
+    document.querySelectorAll('.event-card:not(#gta5-card):not(#gta4-card):not(#fifa23-card):not(#fifa26-card):not(#blur-card):not(#gtasa-card):not(#ppsspp-card):not(#naruto-card):not(#concours-mgp-card)').forEach(card => {
         card.addEventListener('click', function(e) {
             e.preventDefault();
             const url = this.href;
@@ -1095,6 +1116,18 @@
     const gta4Card = document.getElementById('gta4-card');
     if (gta4Card) {
         gta4Card.addEventListener('click', function(e) {
+            e.preventDefault();
+            const url = this.href;
+            playSound(sndEventClick);
+            sessionStorage.setItem('kiddo_from_game', '1');
+            setTimeout(() => { window.location.href = url; }, 150);
+        });
+    }
+
+    // Carte FIFA 23 (Switch) — navigation vers la page dédiée dans le même onglet
+    const fifa23Card = document.getElementById('fifa23-card');
+    if (fifa23Card) {
+        fifa23Card.addEventListener('click', function(e) {
             e.preventDefault();
             const url = this.href;
             playSound(sndEventClick);
