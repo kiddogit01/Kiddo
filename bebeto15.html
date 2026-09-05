@@ -86,6 +86,28 @@
         }
         .views-chip i { color: var(--secondary-glow); }
 
+        .countdown-card {
+            background: linear-gradient(135deg, rgba(255,0,127,0.10), rgba(0,240,255,0.08));
+            border: 1px solid rgba(255,0,127,0.3); border-radius: 16px;
+            padding: 14px 10px 12px; text-align: center; margin-bottom: 26px;
+        }
+        .countdown-card.ended { border-color: rgba(0,255,136,0.35); background: rgba(0,255,136,0.06); }
+        .countdown-card.counting { border-color: rgba(255,176,32,0.4); background: linear-gradient(135deg, rgba(255,176,32,0.12), rgba(255,176,32,0.05)); }
+        .countdown-label {
+            font-size: 0.68rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+            color: var(--secondary-glow); margin-bottom: 10px;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+        }
+        .countdown-timer { display: flex; align-items: flex-start; justify-content: center; gap: 4px; margin-bottom: 8px; }
+        .cd-unit { display: flex; flex-direction: column; align-items: center; min-width: 38px; }
+        .cd-value {
+            font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.25rem; line-height: 1;
+            background: rgba(0,0,0,0.35); border-radius: 8px; padding: 6px 2px; width: 100%;
+        }
+        .cd-unit-label { font-size: 0.54rem; color: var(--muted); margin-top: 3px; text-transform: uppercase; letter-spacing: 0.4px; }
+        .cd-sep { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1rem; color: var(--muted); padding-top: 6px; }
+        .countdown-date { font-size: 0.68rem; color: var(--muted); }
+
         .cta-discover {
             display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%;
             padding: 16px 20px; border-radius: 14px; border: none; cursor: pointer; text-decoration: none;
@@ -132,13 +154,27 @@
 
         <div class="views-chip"><i class="fas fa-eye"></i> <span id="views-count">--</span> vues</div>
 
+        <div class="countdown-card" id="countdown-card">
+            <div class="countdown-label"><i class="fas fa-hourglass-half"></i> <span id="countdown-label-text">Fin de la compétition</span></div>
+            <div class="countdown-timer">
+                <div class="cd-unit"><span class="cd-value" id="cd-days">--</span><span class="cd-unit-label">j</span></div>
+                <div class="cd-sep">:</div>
+                <div class="cd-unit"><span class="cd-value" id="cd-hours">--</span><span class="cd-unit-label">h</span></div>
+                <div class="cd-sep">:</div>
+                <div class="cd-unit"><span class="cd-value" id="cd-mins">--</span><span class="cd-unit-label">min</span></div>
+                <div class="cd-sep">:</div>
+                <div class="cd-unit"><span class="cd-value" id="cd-secs">--</span><span class="cd-unit-label">sec</span></div>
+            </div>
+            <div class="countdown-date" id="countdown-date">Samedi 5 septembre — 15h00 (GMT)</div>
+        </div>
+
         <a class="cta-discover" href="https://kiddogamplay.vercel.app" id="discover-btn">
             <i class="fas fa-arrow-up-right-from-square"></i> Découvrir Kiddo Liens Officiels
         </a>
         <button class="cta-share" id="share-btn" onclick="handleShare()">
             <i class="fas fa-share-nodes"></i> Partager cette page
         </button>
-        <div class="cta-note">Chaque visite compte pour .bebeto15 dans le concours. Merci du soutien 🙏</div>
+        <div class="cta-note" id="cta-note-text">Chaque visite compte pour .bebeto15 dans le concours. Merci du soutien 🙏</div>
 
         <div class="footer-links">
             <a href="https://www.tiktok.com/@kiddo_gamplay?_r=1&_t=ZS-97hckWffTBR" aria-label="TikTok Kiddo"><i class="fab fa-tiktok"></i></a>
@@ -161,6 +197,8 @@
         const SUPABASE_URL = 'https://dcybyieatkwrncolskoh.supabase.co';
         const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_y6yKG40NoPL3jBYCJlPTbQ_rHY3M_Ge';
         const SLUG = 'bebeto15';
+        const COMPETITION_DEADLINE = new Date('2026-09-05T15:00:00Z').getTime();
+        const VIEW_COOLDOWN_MS = 6 * 60 * 60 * 1000; // 6h entre deux vues comptées sur ce navigateur
 
         const { createClient } = supabase;
         const sb = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
@@ -168,11 +206,89 @@
         (async () => {
             const el = document.getElementById('views-count');
             try {
+                // Compétition terminée : on affiche le chiffre figé, sans plus jamais l'incrémenter
+                if (Date.now() >= COMPETITION_DEADLINE) {
+                    const { data, error } = await sb.from('finalistes').select('views').eq('slug', SLUG).single();
+                    el.textContent = (!error && data) ? data.views.toLocaleString('fr-FR') : '—';
+                    return;
+                }
+
+                // Anti-F5 : une seule vue comptée par navigateur toutes les 6h
+                const lastKey = 'kiddo_view_' + SLUG;
+                const last = Number(localStorage.getItem(lastKey) || 0);
+                if (Date.now() - last < VIEW_COOLDOWN_MS) {
+                    const { data, error } = await sb.from('finalistes').select('views').eq('slug', SLUG).single();
+                    el.textContent = (!error && data) ? data.views.toLocaleString('fr-FR') : '—';
+                    return;
+                }
+
                 const { data, error } = await sb.rpc('increment_finaliste_views', { p_slug: SLUG });
-                el.textContent = (!error && typeof data === 'number') ? data.toLocaleString('fr-FR') : '—';
+                if (!error && typeof data === 'number') {
+                    el.textContent = data.toLocaleString('fr-FR');
+                    localStorage.setItem(lastKey, String(Date.now()));
+                } else {
+                    el.textContent = '—';
+                }
             } catch (e) {
                 el.textContent = '—';
             }
+        })();
+
+        /* ---------- Compte à rebours + phases de la compétition ---------- */
+        (function() {
+            const RESULTS_ANNOUNCE = new Date('2026-09-05T18:00:00Z').getTime();
+            const card = document.getElementById('countdown-card');
+            const labelText = document.getElementById('countdown-label-text');
+            const dateEl = document.getElementById('countdown-date');
+            const elDays = document.getElementById('cd-days');
+            const elHours = document.getElementById('cd-hours');
+            const elMins = document.getElementById('cd-mins');
+            const elSecs = document.getElementById('cd-secs');
+            const ctaNote = document.getElementById('cta-note-text');
+            let phase = null;
+
+            function pad(n) { return String(n).padStart(2, '0'); }
+            function setTimer(diff) {
+                elDays.textContent = pad(Math.floor(diff / 86400000));
+                elHours.textContent = pad(Math.floor((diff % 86400000) / 3600000));
+                elMins.textContent = pad(Math.floor((diff % 3600000) / 60000));
+                elSecs.textContent = pad(Math.floor((diff % 60000) / 1000));
+            }
+
+            function enterCounting() {
+                phase = 'counting';
+                card.classList.add('counting');
+                labelText.textContent = 'Calcul des résultats — annonce à 18h';
+                dateEl.textContent = 'Annonce du gagnant à 18h00 (GMT)';
+                if (ctaNote) ctaNote.textContent = 'Compétition terminée pour .bebeto15 — merci pour ton soutien 🙏';
+            }
+
+            function enterAnnounced() {
+                phase = 'announced';
+                card.classList.remove('counting');
+                card.classList.add('ended');
+                labelText.textContent = 'Résultats annoncés';
+                dateEl.textContent = 'Merci à tous les participants 🏆';
+                setTimer(0);
+                clearInterval(cdTimer);
+            }
+
+            function tick() {
+                const now = Date.now();
+                if (now >= RESULTS_ANNOUNCE) {
+                    if (phase !== 'announced') enterAnnounced();
+                    return;
+                }
+                if (now >= COMPETITION_DEADLINE) {
+                    if (phase !== 'counting') enterCounting();
+                    setTimer(RESULTS_ANNOUNCE - now);
+                    return;
+                }
+                phase = 'active';
+                setTimer(COMPETITION_DEADLINE - now);
+            }
+            tick();
+            const cdTimer = setInterval(tick, 1000);
         })();
 
         // Toast simple
