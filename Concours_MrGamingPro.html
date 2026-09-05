@@ -421,6 +421,29 @@
             .contest-title { font-size: 1.28rem; }
             .prize-number { font-size: 2.2rem; }
         }
+
+        .countdown-card {
+            background: linear-gradient(135deg, rgba(255,0,127,0.10), rgba(0,240,255,0.08));
+            border: 1px solid rgba(255,0,127,0.3); border-radius: 18px;
+            padding: 18px 12px 16px; text-align: center; margin-bottom: 22px;
+        }
+        .countdown-card.ended { border-color: rgba(0,255,136,0.35); background: rgba(0,255,136,0.06); }
+        .countdown-card.counting { border-color: rgba(255,176,32,0.4); background: linear-gradient(135deg, rgba(255,176,32,0.12), rgba(255,176,32,0.05)); }
+        .lb-row.locked { cursor: default; opacity: 0.92; }
+        .countdown-label {
+            font-size: 0.74rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+            color: var(--secondary-glow); margin-bottom: 12px;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+        }
+        .countdown-timer { display: flex; align-items: flex-start; justify-content: center; gap: 5px; margin-bottom: 10px; }
+        .cd-unit { display: flex; flex-direction: column; align-items: center; min-width: 44px; }
+        .cd-value {
+            font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.5rem; line-height: 1;
+            background: rgba(0,0,0,0.35); border-radius: 10px; padding: 8px 2px; width: 100%;
+        }
+        .cd-unit-label { font-size: 0.58rem; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .cd-sep { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.2rem; color: var(--muted); padding-top: 8px; }
+        .countdown-date { font-size: 0.72rem; color: var(--muted); }
     </style>
 </head>
 <body>
@@ -446,10 +469,25 @@
         <h1 class="contest-title">キKiddoシ × MR GAMING PRO</h1>
         <p class="contest-sub">Gagne un compte TikTok de 14 000 abonnés en faisant découvrir Kiddo Liens Officiels 🔥</p>
         <div class="status-row">
-            <span class="status-chip"><i class="fas fa-check-circle"></i> Sélection terminée</span>
-            <span class="status-chip alt"><i class="fas fa-users"></i> 20 places sélectionnées</span>
+            <span class="status-chip"><span class="live-dot"></span> Compétition en cours</span>
+            <span class="status-chip alt"><i class="fas fa-users"></i> 9 finalistes en lice</span>
         </div>
     </header>
+
+    <!-- COMPTE À REBOURS -->
+    <div class="countdown-card" id="countdown-card">
+        <div class="countdown-label"><i class="fas fa-hourglass-half"></i> <span id="countdown-label-text">Fin de la compétition</span></div>
+        <div class="countdown-timer">
+            <div class="cd-unit"><span class="cd-value" id="cd-days">--</span><span class="cd-unit-label">jours</span></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit"><span class="cd-value" id="cd-hours">--</span><span class="cd-unit-label">heures</span></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit"><span class="cd-value" id="cd-mins">--</span><span class="cd-unit-label">min</span></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit"><span class="cd-value" id="cd-secs">--</span><span class="cd-unit-label">sec</span></div>
+        </div>
+        <div class="countdown-date" id="countdown-date">Samedi 5 septembre — 15h00 (GMT)</div>
+    </div>
 
     <!-- RÉCOMPENSE -->
     <div class="prize-card">
@@ -531,7 +569,7 @@
     <div class="leaderboard" id="leaderboard">
         <div class="lb-loading">Chargement du classement…</div>
     </div>
-    <p style="text-align:center; font-size:0.78rem; color:var(--muted); margin-top:10px; line-height:1.5;">
+    <p id="leaderboard-note" style="text-align:center; font-size:0.78rem; color:var(--muted); margin-top:10px; line-height:1.5;">
         <span class="lb-live-dot"></span> En direct — le classement se met à jour selon le nombre de vues de chaque finaliste.
     </p>
 
@@ -902,7 +940,10 @@
         if (e.key === 'Escape') { closePrizeDetails(); }
     });
 
-    /* ---------- Classement en direct des finalistes ---------- */
+    /* ---------- Classement des finalistes + phases de la compétition ---------- */
+    const COMPETITION_DEADLINE = new Date('2026-09-05T15:00:00Z').getTime();
+    const RESULTS_ANNOUNCE = new Date('2026-09-05T18:00:00Z').getTime();
+
     async function loadLeaderboard() {
         const { data, error } = await sb
             .from('finalistes')
@@ -915,18 +956,21 @@
     function renderLeaderboard(rows) {
         const el = document.getElementById('leaderboard');
         const medals = ['🥇', '🥈', '🥉'];
+        const locked = Date.now() >= COMPETITION_DEADLINE;
         el.innerHTML = rows.map((r, i) => {
             const rank = i + 1;
             const topClass = rank <= 3 ? (' top' + rank) : '';
             const rankDisplay = rank <= 3 ? medals[rank - 1] : rank;
             const views = (r.views || 0).toLocaleString('fr-FR');
+            const tag = locked ? 'div' : 'a';
+            const hrefAttr = locked ? '' : (' href="' + r.slug + '.html"');
             return (
-                '<a class="lb-row' + topClass + '" href="' + r.slug + '.html">' +
+                '<' + tag + ' class="lb-row' + topClass + (locked ? ' locked' : '') + '"' + hrefAttr + '>' +
                     '<div class="lb-rank">' + rankDisplay + '</div>' +
                     '<img class="lb-photo" src="' + r.photo_url + '" alt="' + r.pseudo + '" onerror="this.src=\'kiddo-app-icon.png\';">' +
                     '<div class="lb-info"><div class="lb-pseudo">' + r.pseudo + '</div></div>' +
                     '<div class="lb-views"><i class="fas fa-eye"></i> ' + views + '</div>' +
-                '</a>'
+                '</' + tag + '>'
             );
         }).join('');
     }
@@ -937,6 +981,66 @@
     sb.channel('finalistes-realtime')
         .on('postgres_changes', { event: '*', schema: 'public', table: 'finalistes' }, loadLeaderboard)
         .subscribe();
+
+    /* ---------- Compte à rebours + bascule automatique des phases ---------- */
+    (function() {
+        const card = document.getElementById('countdown-card');
+        const labelText = document.getElementById('countdown-label-text');
+        const dateEl = document.getElementById('countdown-date');
+        const elDays = document.getElementById('cd-days');
+        const elHours = document.getElementById('cd-hours');
+        const elMins = document.getElementById('cd-mins');
+        const elSecs = document.getElementById('cd-secs');
+        const lbNote = document.getElementById('leaderboard-note');
+        let phase = null; // 'active' | 'counting' | 'announced'
+
+        function pad(n) { return String(n).padStart(2, '0'); }
+
+        function setTimer(diff) {
+            elDays.textContent = pad(Math.floor(diff / 86400000));
+            elHours.textContent = pad(Math.floor((diff % 86400000) / 3600000));
+            elMins.textContent = pad(Math.floor((diff % 3600000) / 60000));
+            elSecs.textContent = pad(Math.floor((diff % 60000) / 1000));
+        }
+
+        function enterCounting() {
+            phase = 'counting';
+            card.classList.remove('ended');
+            card.classList.add('counting');
+            labelText.textContent = 'Calcul des résultats — annonce à 18h';
+            dateEl.textContent = 'Annonce du gagnant à 18h00 (GMT)';
+            if (lbNote) lbNote.innerHTML = '<span class="lb-live-dot" style="background:var(--amber);"></span> Compétition terminée — classement figé, résultats en cours de vérification.';
+            loadLeaderboard(); // re-rend pour verrouiller les liens immédiatement
+        }
+
+        function enterAnnounced() {
+            phase = 'announced';
+            card.classList.remove('counting');
+            card.classList.add('ended');
+            labelText.textContent = 'Résultats annoncés';
+            dateEl.textContent = 'Merci à tous les participants 🏆';
+            setTimer(0);
+            if (lbNote) lbNote.innerHTML = '🏆 Compétition terminée — merci à tous les participants !';
+            clearInterval(cdTimer);
+        }
+
+        function tick() {
+            const now = Date.now();
+            if (now >= RESULTS_ANNOUNCE) {
+                if (phase !== 'announced') enterAnnounced();
+                return;
+            }
+            if (now >= COMPETITION_DEADLINE) {
+                if (phase !== 'counting') enterCounting();
+                setTimer(RESULTS_ANNOUNCE - now);
+                return;
+            }
+            phase = 'active';
+            setTimer(COMPETITION_DEADLINE - now);
+        }
+        tick();
+        const cdTimer = setInterval(tick, 1000);
+    })();
 
     async function shareCompetition() {
         const shareData = {
