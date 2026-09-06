@@ -430,6 +430,29 @@
         .countdown-card.ended { border-color: rgba(0,255,136,0.35); background: rgba(0,255,136,0.06); }
         .countdown-card.counting { border-color: rgba(255,176,32,0.4); background: linear-gradient(135deg, rgba(255,176,32,0.12), rgba(255,176,32,0.05)); }
         .lb-row.locked { cursor: default; opacity: 0.92; }
+
+        .winner-card {
+            text-align: center; border-radius: 20px; padding: 28px 20px 24px; margin-bottom: 22px;
+            border: 1px solid rgba(255,176,32,0.4);
+            background: linear-gradient(160deg, rgba(255,176,32,0.14), rgba(255,0,127,0.08));
+        }
+        .winner-label {
+            font-size: 0.76rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+            color: var(--amber); margin-bottom: 16px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .winner-photo {
+            width: 112px; height: 112px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 16px;
+            border: 3px solid var(--amber); box-shadow: 0 0 34px rgba(255,176,32,0.4); background: #1a1b26;
+        }
+        .winner-name { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.4rem; margin-bottom: 8px; }
+        .winner-sub { color: var(--muted); font-size: 0.88rem; margin-bottom: 18px; }
+        .winner-sub b { color: var(--text-color); }
+        .winner-link {
+            display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 12px;
+            background: linear-gradient(135deg, var(--amber), #ff8a00); color: #14100a; text-decoration: none;
+            font-weight: 700; font-size: 0.88rem;
+        }
         .countdown-label {
             font-size: 0.74rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
             color: var(--secondary-glow); margin-bottom: 12px;
@@ -487,6 +510,15 @@
             <div class="cd-unit"><span class="cd-value" id="cd-secs">--</span><span class="cd-unit-label">sec</span></div>
         </div>
         <div class="countdown-date" id="countdown-date">Samedi 5 septembre — 15h00 (GMT)</div>
+    </div>
+
+    <!-- 🏆 GAGNANT ANNONCÉ -->
+    <div class="winner-card">
+        <div class="winner-label"><i class="fas fa-crown"></i> Grand gagnant du concours</div>
+        <img class="winner-photo" src="https://dcybyieatkwrncolskoh.supabase.co/storage/v1/object/public/photos-candidature/1788029390149__jobegamingofficiel.jpg" alt="Job Gaming Officiel" onerror="this.src='kiddo-app-icon.png';">
+        <div class="winner-name">Job Gaming Officiel</div>
+        <div class="winner-sub">Remporte le compte TikTok de <b>14 000 abonnés</b> 🎉</div>
+        <a class="winner-link" href="job-gaming-officiel.html"><i class="fas fa-arrow-right"></i> Voir sa page</a>
     </div>
 
     <!-- RÉCOMPENSE -->

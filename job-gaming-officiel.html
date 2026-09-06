@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Gaming Officiel — Finaliste キKiddoシ x MR GAMING PRO</title>
+    <title>Job Gaming Officiel — 🏆 GAGNANT キKiddoシ x MR GAMING PRO</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
 
     <!-- ✅ Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Job Gaming Officiel — Finaliste キKiddoシ x MR GAMING PRO">
+    <meta property="og:title" content="Job Gaming Officiel — 🏆 GAGNANT キKiddoシ x MR GAMING PRO">
     <meta property="og:description" content="Aide Job Gaming Officiel à remporter le compte TikTok de 14 000 abonnés en découvrant Kiddo Liens Officiels 🔥">
     <meta property="og:url" content="https://kiddogamplay.vercel.app/job-gaming-officiel.html">
     <meta property="og:image" content="https://dcybyieatkwrncolskoh.supabase.co/storage/v1/object/public/photos-candidature/1788029390149__jobegamingofficiel.jpg">
@@ -148,9 +148,9 @@
             <img src="https://dcybyieatkwrncolskoh.supabase.co/storage/v1/object/public/photos-candidature/1788029390149__jobegamingofficiel.jpg" alt="Job Gaming Officiel" onerror="this.src='kiddo-app-icon.png';">
         </div>
 
-        <div class="badge-finalist"><i class="fas fa-trophy"></i> Finaliste sélectionné(e)</div>
+        <div class="badge-finalist"><i class="fas fa-crown"></i> Grand gagnant du concours</div>
         <div class="pseudo">Job Gaming Officiel</div>
-        <div class="subtitle">Fait partie des <b>9 finalistes</b> en lice pour remporter le compte TikTok de <b>14 000 abonnés</b> 🏆</div>
+        <div class="subtitle">A remporté le compte TikTok de <b>14 000 abonnés</b> 🎉🏆</div>
 
         <div class="views-chip"><i class="fas fa-eye"></i> <span id="views-count">--</span> vues</div>
 
@@ -270,6 +270,7 @@
                 labelText.textContent = 'Résultats annoncés';
                 dateEl.textContent = 'Merci à tous les participants 🏆';
                 setTimer(0);
+                if (ctaNote) ctaNote.innerHTML = '🏆 <b>Grand gagnant du concours !</b> Merci à toute la communauté pour son soutien 🎉';
                 clearInterval(cdTimer);
             }
 
@@ -308,7 +309,7 @@
         // Partage de la page (Web Share API, sinon copie du lien)
         function handleShare() {
             const shareData = {
-                title: 'Job Gaming Officiel — Finaliste キKiddoシ x MR GAMING PRO',
+                title: 'Job Gaming Officiel — 🏆 GAGNANT キKiddoシ x MR GAMING PRO',
                 text: 'Aide Job Gaming Officiel à remporter le compte TikTok de 14 000 abonnés ! Découvre Kiddo Liens Officiels 🔥',
                 url: window.location.href
             };
