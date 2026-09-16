@@ -66,6 +66,12 @@
     <loc>https://kiddogamplay.vercel.app/fifa23.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/I96dZH3Bo40/hqdefault.jpg</video:thumbnail_loc>
+      <video:title>Tutoriel d'installation EA SPORTS FIFA 23 (Nintendo Switch)</video:title>
+      <video:description>Tutoriel complet pour installer EA SPORTS FIFA 23 (Nintendo Switch Legacy Edition) sur Android.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/I96dZH3Bo40</video:player_loc>
+    </video:video>
   </url>
 
   <url>

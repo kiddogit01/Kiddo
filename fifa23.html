@@ -133,6 +133,8 @@
             font-size: 0.76rem; font-weight: 700; text-decoration: none;
             box-shadow: 0 4px 14px rgba(255,50,50,0.35); transition: transform 0.2s ease;
         }
+        .tuto-video-box.ready { border: 2px solid var(--border-color); animation: none; box-shadow: none; }
+        .tuto-video-box.ready iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
         .yt-notify-btn:hover { transform: scale(1.05); }
 
         /* Note finale */
@@ -261,15 +263,13 @@
             <div class="step-num">5</div>
             <div class="step-title">Suivre ce tutoriel</div>
         </div>
-        <div class="tuto-video-box">
-            <i class="fas fa-clapperboard"></i>
-            <div class="tuto-overlay">
-                <i class="fas fa-triangle-exclamation warn-icon"></i>
-                <span>Tutoriel en cours de création 🚧</span>
-                <a href="https://youtube.com/@kiddo_gamplay" target="_blank" rel="noopener noreferrer" class="yt-notify-btn">
-                    <i class="fab fa-youtube"></i> S'abonner pour être notifié
-                </a>
-            </div>
+        <div class="tuto-video-box ready">
+            <iframe src="https://www.youtube.com/embed/I96dZH3Bo40"
+                    title="Tutoriel d'installation EA SPORTS FIFA 23 (Nintendo Switch Legacy Edition)"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen loading="lazy"></iframe>
         </div>
     </div>
 
