@@ -257,6 +257,13 @@
             100% { border-color: rgba(0,255,136,0.9);  box-shadow: 0 0 28px rgba(0,255,136,0.55); }
         }
         .event-card-img { width: 100%; height: 160px; object-fit: cover; display: block; }
+        .event-card-media { position: relative; width: 100%; height: 160px; overflow: hidden; background: #0d0e15; }
+        .event-card-media .event-card-img { position: absolute; inset: 0; z-index: 1; }
+        .event-card-preview {
+            position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; border: 0;
+            pointer-events: none; opacity: 0; transition: opacity 0.6s ease;
+        }
+        .event-card-preview.visible { opacity: 1; }
         .event-img-placeholder {
             width: 100%; height: 160px;
             background: linear-gradient(135deg, rgba(255,0,127,0.12), rgba(0,240,255,0.12));
@@ -650,11 +657,15 @@
             <!-- ================================================
                  📥 BLUR
             ================================================ -->
-            <a class="event-card" id="blur-card" href="blur.html">
-                <img class="event-card-img" loading="lazy"
+            <a class="event-card" id="blur-card" data-video="REMPLACEZ_ID_VIDEO" href="blur.html">
+                <div class="event-card-media">
+                    <img class="event-card-img" loading="lazy"
                      src="https://i.ibb.co/jPXyMJdZ/images-2.webp"
                      alt="BLUR"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                     onerror="this.style.display='none';this.parentElement.nextElementSibling.style.display='flex';">
+                    <!-- 🎬 APERÇU GAMEPLAY — remplacez REMPLACEZ_ID_VIDEO par l'ID YouTube (ex: dQw4w9WgXcQ) -->
+                    <iframe class="event-card-preview" title="Aperçu gameplay" frameborder="0" tabindex="-1" loading="lazy"></iframe>
+                </div>
                 <div class="event-img-placeholder"><i class="fas fa-flag-checkered"></i></div>
                 <div class="event-card-body">
                     <div class="event-card-title">BLUR</div>
@@ -671,11 +682,15 @@
                  📥 EA SPORTS FIFA 23 — Nintendo Switch Legacy Edition
                  ► Redirige vers une page dédiée (couverture + tuto)
             ================================================ -->
-            <a class="event-card" id="fifa23-card" href="fifa23.html">
-                <img class="event-card-img" loading="lazy"
+            <a class="event-card" id="fifa23-card" data-video="REMPLACEZ_ID_VIDEO" href="fifa23.html">
+                <div class="event-card-media">
+                    <img class="event-card-img" loading="lazy"
                      src="https://cdn.cloudflare.steamstatic.com/steam/apps/1811260/header.jpg"
                      alt="EA SPORTS FIFA 23 (Nintendo Switch Legacy Edition)"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                     onerror="this.style.display='none';this.parentElement.nextElementSibling.style.display='flex';">
+                    <!-- 🎬 APERÇU GAMEPLAY — remplacez REMPLACEZ_ID_VIDEO par l'ID YouTube (ex: dQw4w9WgXcQ) -->
+                    <iframe class="event-card-preview" title="Aperçu gameplay" frameborder="0" tabindex="-1" loading="lazy"></iframe>
+                </div>
                 <div class="event-img-placeholder"><i class="fas fa-futbol"></i></div>
                 <div class="event-card-body">
                     <div class="event-card-title">EA SPORTS FIFA 23 (Nintendo Switch)</div>
@@ -692,11 +707,15 @@
                  📥 FIFA 26 (MODE)
                  ► Redirige vers une page dédiée (couverture + tuto)
             ================================================ -->
-            <a class="event-card" id="fifa26-card" href="fifa26.html">
-                <img class="event-card-img" loading="lazy"
+            <a class="event-card" id="fifa26-card" data-video="REMPLACEZ_ID_VIDEO" href="fifa26.html">
+                <div class="event-card-media">
+                    <img class="event-card-img" loading="lazy"
                      src="https://files.catbox.moe/v4syx8.webp"
                      alt="FIFA 26 (Mode)"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                     onerror="this.style.display='none';this.parentElement.nextElementSibling.style.display='flex';">
+                    <!-- 🎬 APERÇU GAMEPLAY — remplacez REMPLACEZ_ID_VIDEO par l'ID YouTube (ex: dQw4w9WgXcQ) -->
+                    <iframe class="event-card-preview" title="Aperçu gameplay" frameborder="0" tabindex="-1" loading="lazy"></iframe>
+                </div>
                 <div class="event-img-placeholder"><i class="fas fa-futbol"></i></div>
                 <div class="event-card-body">
                     <div class="event-card-title">FIFA 26 (Mode)</div>
@@ -713,11 +732,15 @@
                  📥 GRAND THEFT AUTO IV
                  ► Redirige vers une page dédiée (vidéo + tuto)
             ================================================ -->
-            <a class="event-card" id="gta4-card" href="gta4.html">
-                <img class="event-card-img" loading="lazy"
+            <a class="event-card" id="gta4-card" data-video="REMPLACEZ_ID_VIDEO" href="gta4.html">
+                <div class="event-card-media">
+                    <img class="event-card-img" loading="lazy"
                      src="https://cdn.cloudflare.steamstatic.com/steam/apps/12210/header.jpg"
                      alt="Grand Theft Auto IV"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                     onerror="this.style.display='none';this.parentElement.nextElementSibling.style.display='flex';">
+                    <!-- 🎬 APERÇU GAMEPLAY — remplacez REMPLACEZ_ID_VIDEO par l'ID YouTube (ex: dQw4w9WgXcQ) -->
+                    <iframe class="event-card-preview" title="Aperçu gameplay" frameborder="0" tabindex="-1" loading="lazy"></iframe>
+                </div>
                 <div class="event-img-placeholder"><i class="fas fa-gamepad"></i></div>
                 <div class="event-card-body">
                     <div class="event-card-title">Grand Theft Auto IV</div>
@@ -734,11 +757,15 @@
                  📥 GRAND THEFT AUTO V
                  ► Redirige vers une page dédiée (vidéo + tuto)
             ================================================ -->
-            <a class="event-card" id="gta5-card" href="gta5.html">
-                <img class="event-card-img" loading="lazy"
+            <a class="event-card" id="gta5-card" data-video="REMPLACEZ_ID_VIDEO" href="gta5.html">
+                <div class="event-card-media">
+                    <img class="event-card-img" loading="lazy"
                      src="https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg"
                      alt="Grand Theft Auto V"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                     onerror="this.style.display='none';this.parentElement.nextElementSibling.style.display='flex';">
+                    <!-- 🎬 APERÇU GAMEPLAY — remplacez REMPLACEZ_ID_VIDEO par l'ID YouTube (ex: dQw4w9WgXcQ) -->
+                    <iframe class="event-card-preview" title="Aperçu gameplay" frameborder="0" tabindex="-1" loading="lazy"></iframe>
+                </div>
                 <div class="event-img-placeholder"><i class="fas fa-gamepad"></i></div>
                 <div class="event-card-body">
                     <div class="event-card-title">Grand Theft Auto V</div>
@@ -754,11 +781,15 @@
             <!-- ================================================
                  📥 GTA SAN ANDREAS — THE DEFINITIVE EDITION
             ================================================ -->
-            <a class="event-card" id="gtasa-card" href="gtasa.html">
-                <img class="event-card-img" loading="lazy"
+            <a class="event-card" id="gtasa-card" data-video="REMPLACEZ_ID_VIDEO" href="gtasa.html">
+                <div class="event-card-media">
+                    <img class="event-card-img" loading="lazy"
                      src="https://i.ibb.co/8DRQDvNb/images-3.webp"
                      alt="GTA San Andreas: The Definitive Edition"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                     onerror="this.style.display='none';this.parentElement.nextElementSibling.style.display='flex';">
+                    <!-- 🎬 APERÇU GAMEPLAY — remplacez REMPLACEZ_ID_VIDEO par l'ID YouTube (ex: dQw4w9WgXcQ) -->
+                    <iframe class="event-card-preview" title="Aperçu gameplay" frameborder="0" tabindex="-1" loading="lazy"></iframe>
+                </div>
                 <div class="event-img-placeholder"><i class="fas fa-gamepad"></i></div>
                 <div class="event-card-body">
                     <div class="event-card-title">GTA San Andreas: The Definitive Edition</div>
@@ -774,11 +805,15 @@
             <!-- ================================================
                  📥 NARUTO X BORUTO — ULTIMATE NINJA STORM CONNECTIONS
             ================================================ -->
-            <a class="event-card" id="naruto-card" href="narutostorm.html">
-                <img class="event-card-img" loading="lazy"
+            <a class="event-card" id="naruto-card" data-video="REMPLACEZ_ID_VIDEO" href="narutostorm.html">
+                <div class="event-card-media">
+                    <img class="event-card-img" loading="lazy"
                      src="https://cdn.cloudflare.steamstatic.com/steam/apps/1020790/header.jpg"
                      alt="NARUTO X BORUTO: Ultimate Ninja STORM CONNECTIONS"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                     onerror="this.style.display='none';this.parentElement.nextElementSibling.style.display='flex';">
+                    <!-- 🎬 APERÇU GAMEPLAY — remplacez REMPLACEZ_ID_VIDEO par l'ID YouTube (ex: dQw4w9WgXcQ) -->
+                    <iframe class="event-card-preview" title="Aperçu gameplay" frameborder="0" tabindex="-1" loading="lazy"></iframe>
+                </div>
                 <div class="event-img-placeholder"><i class="fas fa-gamepad"></i></div>
                 <div class="event-card-body">
                     <div class="event-card-title">NARUTO X BORUTO: Ultimate Ninja STORM CONNECTIONS</div>
@@ -794,11 +829,15 @@
             <!-- ================================================
                  📥 PPSSPP — Android/iOS
             ================================================ -->
-            <a class="event-card" id="ppsspp-card" href="ppsspp.html">
-                <img class="event-card-img" loading="lazy"
+            <a class="event-card" id="ppsspp-card" data-video="REMPLACEZ_ID_VIDEO" href="ppsspp.html">
+                <div class="event-card-media">
+                    <img class="event-card-img" loading="lazy"
                      src="https://i.ibb.co/q39SGNtk/images-4.webp"
                      alt="PPSSPP"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                     onerror="this.style.display='none';this.parentElement.nextElementSibling.style.display='flex';">
+                    <!-- 🎬 APERÇU GAMEPLAY — remplacez REMPLACEZ_ID_VIDEO par l'ID YouTube (ex: dQw4w9WgXcQ) -->
+                    <iframe class="event-card-preview" title="Aperçu gameplay" frameborder="0" tabindex="-1" loading="lazy"></iframe>
+                </div>
                 <div class="event-img-placeholder"><i class="fas fa-compact-disc"></i></div>
                 <div class="event-card-body">
                     <div class="event-card-title">PPSSPP — Android/iOS</div>
@@ -1060,6 +1099,53 @@
             setTimeout(() => window.open(url, '_blank', 'noopener,noreferrer'), 150);
         });
     });
+
+    /* ============================================================
+       🎬 APERÇU GAMEPLAY ANIMÉ — cartes de jeux (onglet Téléchargement)
+       Affiche la couverture, puis lance la vidéo en boucle après 2s
+       UNIQUEMENT si la carte est visible à l'écran (économie data/batterie).
+       Pour activer un jeu : remplacez data-video="REMPLACEZ_ID_VIDEO"
+       par l'ID YouTube de la vidéo gameplay (ex: dQw4w9WgXcQ).
+    ============================================================ */
+    (function() {
+        const PREVIEW_DELAY = 2000; // 2 secondes
+        const previewTimers = new WeakMap();
+
+        function startPreview(card) {
+            const iframe = card.querySelector('.event-card-preview');
+            const videoId = card.dataset.video;
+            if (!iframe || !videoId || videoId.indexOf('REMPLACEZ') === 0) return;
+            const timer = setTimeout(() => {
+                iframe.src = 'https://www.youtube.com/embed/' + videoId +
+                    '?autoplay=1&mute=1&loop=1&playlist=' + videoId +
+                    '&controls=0&modestbranding=1&playsinline=1&rel=0';
+                iframe.classList.add('visible');
+            }, PREVIEW_DELAY);
+            previewTimers.set(card, timer);
+        }
+
+        function stopPreview(card) {
+            const timer = previewTimers.get(card);
+            if (timer) clearTimeout(timer);
+            previewTimers.delete(card);
+            const iframe = card.querySelector('.event-card-preview');
+            if (iframe && iframe.classList.contains('visible')) {
+                iframe.classList.remove('visible');
+                iframe.src = '';
+            }
+        }
+
+        const previewCards = document.querySelectorAll('#tab-download .event-card[data-video]');
+        if (previewCards.length && 'IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) startPreview(entry.target);
+                    else stopPreview(entry.target);
+                });
+            }, { threshold: 0.5 });
+            previewCards.forEach(card => observer.observe(card));
+        }
+    })();
 
     // Clic cards compétitions (hors One State)
     document.querySelectorAll('.event-card:not(#gta5-card):not(#gta4-card):not(#fifa23-card):not(#fifa26-card):not(#blur-card):not(#gtasa-card):not(#ppsspp-card):not(#naruto-card)').forEach(card => {
