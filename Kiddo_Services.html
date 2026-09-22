@@ -565,6 +565,24 @@
         done: ''
     };
 
+    /* ---------- AdSterra — injection d'un slot atOptions dans une étape générée en JS ----------
+       (un <script> inséré via innerHTML ne s'exécute pas ; on le rejoue donc dans un iframe frais) */
+    function injectAtOptionsAd(containerId, key, w, h) {
+        const el = document.getElementById(containerId);
+        if (!el) return;
+        const iframe = document.createElement('iframe');
+        iframe.width = w; iframe.height = h;
+        iframe.style.border = '0'; iframe.style.display = 'block'; iframe.scrolling = 'no';
+        el.appendChild(iframe);
+        const doc = iframe.contentWindow.document;
+        doc.open();
+        doc.write(
+            '<script>atOptions=' + JSON.stringify({ key: key, format: 'iframe', height: h, width: w, params: {} }) + ';<\/script>' +
+            '<script src="https://www.highrevenueformat.com/' + key + '/invoke.js"><\/script>'
+        );
+        doc.close();
+    }
+
     function renderStep(step) {
         const pv     = document.getElementById('ks-page-view');
         const back   = document.getElementById('ks-page-back');
@@ -578,6 +596,7 @@
         body.innerHTML = TEMPLATES[step] ? TEMPLATES[step]() : '';
         footer.innerHTML = FOOTERS[step] ? FOOTERS[step]() : '';
         checkContinue(step);
+        if (step === 'g-name') injectAtOptionsAd('ad-slot-gname', '4dea3f2d83bff8e76846e5fc0bacae9e', 300, 250);
         body.scrollTop = 0;
         body.classList.remove('ks-anim');
         void body.offsetWidth;
@@ -712,7 +731,8 @@
             <label class="ks-label">Nom et prénom</label>
             <input type="text" class="ks-input" id="inp-g-name" placeholder="Ex : Junior Kouassi" maxlength="60"
                 value="${escapeHTML(wz.data.name || '')}" oninput="checkContinue('g-name')">
-        </div>`;
+        </div>
+        <div id="ad-slot-gname" style="margin-top:20px;display:flex;justify-content:center;overflow:hidden;border-radius:10px;min-height:250px;"></div>`;
     }
     function submitGName() {
         wz.data.name = document.getElementById('inp-g-name').value.trim();
