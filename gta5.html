@@ -6,8 +6,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <script src="https://quge5.com/88/tag.min.js" data-zone="266466" async data-cfasync="false"></script>
-    <script src="https://pl31437227.profitableratecpmnetwork.com/0f/51/75/0f5175a2b284cfef8fc30a197f02045f.js"></script> <!-- AdSterra Popunder -->
     <script defer src="anti-adblock.js"></script>
     <title>Grand Theft Auto V (GTA 5) — Téléchargement & Tuto | キKiddoシ</title>
     <meta name="description" content="Téléchargez GTA 5 (Grand Theft Auto V) sur Kiddo Gamplay : émulateur, fichier du jeu, et tutoriel d'installation étape par étape.">
@@ -181,11 +179,7 @@
     </style>
 </head>
 <body>
-<!-- ============================================================
-     AdSterra — bannières verticales 160x600 (gauche/droite)
-     Visibles uniquement PC / tablette (>= 768px) pour ne pas
-     gêner l'expérience mobile.
-============================================================ -->
+<!-- AdSterra — bannières verticales 160x600, chargées uniquement après consentement (voir consent.js) -->
 <style>
     .kiddo-ad-side {
         position: fixed; top: 50%; transform: translateY(-50%);
@@ -196,30 +190,8 @@
     .kiddo-ad-side-r { right: 8px; }
     @media (max-width: 767px) { .kiddo-ad-side { display: none !important; } }
 </style>
-<div class="kiddo-ad-side kiddo-ad-side-l">
-    <script type="text/javascript">
-        atOptions = {
-            'key' : '84fa10bb2797af519d50d66a72a4e6b5',
-            'format' : 'iframe',
-            'height' : 600,
-            'width' : 160,
-            'params' : {}
-        };
-    </script>
-    <script src="https://www.highrevenueformat.com/84fa10bb2797af519d50d66a72a4e6b5/invoke.js"></script>
-</div>
-<div class="kiddo-ad-side kiddo-ad-side-r">
-    <script type="text/javascript">
-        atOptions = {
-            'key' : '84fa10bb2797af519d50d66a72a4e6b5',
-            'format' : 'iframe',
-            'height' : 600,
-            'width' : 160,
-            'params' : {}
-        };
-    </script>
-    <script src="https://www.highrevenueformat.com/84fa10bb2797af519d50d66a72a4e6b5/invoke.js"></script>
-</div>
+<div class="kiddo-ad-side kiddo-ad-side-l" id="kiddo-ad-side-l"></div>
+<div class="kiddo-ad-side kiddo-ad-side-r" id="kiddo-ad-side-r"></div>
 
 <div class="bg-animate"></div>
 
@@ -293,21 +265,17 @@
 
     <!-- AdSterra — bannière 728x90 en fin de page (conteneur scrollable pour ne pas casser le mobile) -->
     <div style="width:100%;max-width:728px;margin:22px auto 0;overflow-x:auto;">
-        <div style="width:728px;margin:0 auto;">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : '015d3a159fdea00a6a1171241f02036e',
-                    'format' : 'iframe',
-                    'height' : 90,
-                    'width' : 728,
-                    'params' : {}
-                };
-            </script>
-            <script src="https://www.highrevenueformat.com/015d3a159fdea00a6a1171241f02036e/invoke.js"></script>
-        </div>
+        <div style="width:728px;margin:0 auto;" id="ad-banner-728x90"></div>
     </div>
 
 </div>
+
+<footer style="max-width:560px;margin:22px auto 0;padding:0 20px;text-align:center;font-size:0.74rem;color:#6b6c7d;line-height:1.9;">
+    <a href="politique-confidentialite.html" style="color:#6b6c7d;">Politique de confidentialité</a> ·
+    <a href="conditions-utilisation.html" style="color:#6b6c7d;">Conditions d'utilisation</a> ·
+    <a href="politique-cookies.html" style="color:#6b6c7d;">Politique de cookies</a> ·
+    <a href="javascript:void(0)" onclick="window.kiddoOpenConsentBanner && window.kiddoOpenConsentBanner()" style="color:#6b6c7d;">Gérer mes cookies</a>
+</footer>
 
 <!-- Son de clic (identique au reste du site) -->
 <audio id="snd-click" preload="none">
@@ -323,18 +291,7 @@
         <div class="ad-countdown-ring" id="ad-countdown">10</div>
         <div class="ad-popup-label" id="ad-popup-label">Votre téléchargement est prêt 📥</div>
         <div class="ad-popup-sub" id="ad-popup-sub">Merci de patienter quelques secondes...</div>
-        <div style="margin-top:14px;display:flex;justify-content:center;overflow:hidden;border-radius:10px;">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : '386ba643a9a758e7703858216fc0115f',
-                    'format' : 'iframe',
-                    'height' : 50,
-                    'width' : 320,
-                    'params' : {}
-                };
-            </script>
-            <script src="https://www.highrevenueformat.com/386ba643a9a758e7703858216fc0115f/invoke.js"></script>
-        </div>
+        <div style="margin-top:14px;display:flex;justify-content:center;overflow:hidden;border-radius:10px;" id="ad-popup-320x50"></div>
     </div>
 </div>
 
@@ -401,13 +358,27 @@
         playClick();
     });
 
-    // 📢 Enregistrement du service worker Monetag (sw.js à la racine du repo)
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js').catch(() => {});
-    }
+    // 📢 Service worker Monetag — enregistré uniquement après consentement (voir consent.js)
 </script>
 
-<!-- AdSterra Social Bar (volontairement séparée du tag Monetag ci-dessus) -->
-<script src="https://pl31437229.profitableratecpmnetwork.com/ed/c4/e8/edc4e84a562b230fbd6777de417b36c5.js"></script>
+<!-- 🍪 Traceurs publicitaires — chargés uniquement après consentement (voir /consent.js et /politique-cookies.html) -->
+<script>
+window.KIDDO_ADS = {
+    simple: [
+        'https://quge5.com/88/tag.min.js',
+        'https://pl31437227.profitableratecpmnetwork.com/0f/51/75/0f5175a2b284cfef8fc30a197f02045f.js',
+        'https://pl31437229.profitableratecpmnetwork.com/ed/c4/e8/edc4e84a562b230fbd6777de417b36c5.js',
+        { src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9505679761329817', attrs: { crossorigin: 'anonymous' } }
+    ],
+    registerSW: true,
+    atOptions: [
+        { container: 'kiddo-ad-side-l', key: '84fa10bb2797af519d50d66a72a4e6b5', w: 160, h: 600 },
+        { container: 'kiddo-ad-side-r', key: '84fa10bb2797af519d50d66a72a4e6b5', w: 160, h: 600 },
+        { container: 'ad-popup-320x50', key: '386ba643a9a758e7703858216fc0115f', w: 320, h: 50 },
+        { container: 'ad-banner-728x90', key: '015d3a159fdea00a6a1171241f02036e', w: 728, h: 90 }
+    ]
+};
+</script>
+<script src="/consent.js" defer></script>
 </body>
 </html>

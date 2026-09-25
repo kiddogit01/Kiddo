@@ -1,0 +1,26 @@
+# キKiddoシ — Kiddo Gamplay
+
+> Site francophone (Côte d'Ivoire) de tutoriels d'installation de jeux vidéo et d'émulateurs sur mobile/PC, avec un outil de contact pour l'installation de jeux, la collaboration, les avis et la publicité.
+
+Le site fournit des guides pas-à-pas et des liens de téléchargement tiers pour plusieurs jeux (GTA V, GTA IV, GTA San Andreas, FIFA, Naruto Shippuden Ultimate Ninja Storm, émulateur PPSSPP, etc.). Il ne stocke aucune donnée utilisateur côté serveur : l'outil de contact "Kiddo Services" prépare un message que l'utilisateur envoie lui-même via WhatsApp ou e-mail.
+
+## Pages principales
+- [Accueil](https://kiddogamplay.vercel.app/index.html) — liens officiels, réseaux sociaux, accès aux jeux et à Kiddo Services
+- [Kiddo Services](https://kiddogamplay.vercel.app/Kiddo_Services.html) — installation de jeux, collaboration, avis, publicité, signalement de bug
+- [Politique de confidentialité](https://kiddogamplay.vercel.app/politique-confidentialite.html)
+- [Conditions d'utilisation](https://kiddogamplay.vercel.app/conditions-utilisation.html)
+- [Politique de cookies](https://kiddogamplay.vercel.app/politique-cookies.html)
+
+## Pages de jeux
+- [GTA 5](https://kiddogamplay.vercel.app/gta5.html)
+- [GTA 4](https://kiddogamplay.vercel.app/gta4.html)
+- [GTA San Andreas](https://kiddogamplay.vercel.app/gtasa.html)
+- [FIFA 23](https://kiddogamplay.vercel.app/fifa23.html)
+- [FIFA 26](https://kiddogamplay.vercel.app/fifa26.html)
+- [Naruto Shippuden Ultimate Ninja Storm](https://kiddogamplay.vercel.app/narutostorm.html)
+- [PPSSPP (émulateur PSP)](https://kiddogamplay.vercel.app/ppsspp.html)
+- [Blur](https://kiddogamplay.vercel.app/blur.html)
+
+## Notes
+- Le site est gratuit et financé par la publicité (Monetag, AdSterra, Google AdSense), chargée uniquement après consentement de l'utilisateur.
+- Le contenu est en français.

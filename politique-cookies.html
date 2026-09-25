@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Politique de cookies | キKiddoシ</title>
+<meta name="description" content="Détail des cookies et traceurs utilisés sur Kiddo Gamplay (Monetag, AdSterra, Google AdSense) et comment les accepter ou les refuser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="legal.css">
+</head>
+<body>
+
+<div class="top-bar">
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+    <div class="top-bar-title">キKiddoシ</div>
+</div>
+
+<div class="legal-wrap">
+    <h1>Politique de cookies</h1>
+    <div class="legal-updated">Dernière mise à jour : 22 septembre 2026</div>
+
+    <p>Un cookie est un petit fichier déposé par un site dans votre navigateur. Kiddo Gamplay lui-même n'utilise aucun cookie pour son propre fonctionnement — tous les cookies présents sur le site proviennent de nos partenaires publicitaires, et uniquement si vous les acceptez.</p>
+
+    <div class="legal-card">
+        <p><strong>Votre choix actuel : <span id="kc-status">chargement…</span></strong></p>
+        <button class="legal-btn" onclick="window.kiddoOpenConsentBanner && window.kiddoOpenConsentBanner()" type="button"><i class="fas fa-cookie-bite"></i> Gérer mes cookies</button>
+    </div>
+
+    <h2>Si vous refusez</h2>
+    <p>Aucun des traceurs ci-dessous n'est chargé et le site reste 100 % fonctionnel : navigation, tutoriels, téléchargements et l'outil « Kiddo Services » fonctionnent normalement sans eux.</p>
+
+    <h2>Si vous acceptez</h2>
+    <p>Les traceurs suivants peuvent être déposés :</p>
+
+    <div class="legal-table-wrap">
+    <table class="legal-table">
+        <tr><th>Fournisseur</th><th>Rôle sur le site</th><th>Finalité</th><th>En savoir plus</th></tr>
+        <tr>
+            <td>Monetag</td>
+            <td>Bannières publicitaires + notification push (via un service worker)</td>
+            <td>Publicité, mesure des blocages de pub</td>
+            <td><a href="https://monetag.com/privacy-policy/" target="_blank" rel="noopener">Politique Monetag</a></td>
+        </tr>
+        <tr>
+            <td>AdSterra</td>
+            <td>Bannières publicitaires, pop-under, barre sociale</td>
+            <td>Publicité</td>
+            <td><a href="https://adsterra.com/privacy-policy/" target="_blank" rel="noopener">Politique AdSterra</a></td>
+        </tr>
+        <tr>
+            <td>Google AdSense</td>
+            <td>Bannières publicitaires automatiques</td>
+            <td>Publicité, personnalisation des annonces</td>
+            <td><a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">Politique Google Ads</a></td>
+        </tr>
+    </table>
+    </div>
+
+    <p>Ces sociétés fixent elles-mêmes la durée de vie exacte de leurs cookies ; elle n'est pas contrôlée par Kiddo Gamplay. Consultez leurs politiques respectives ci-dessus pour le détail (durée, sous-traitants, transferts internationaux).</p>
+
+    <h2>Changer d'avis</h2>
+    <p>Vous pouvez revenir sur votre choix à tout moment avec le bouton « Gérer mes cookies » ci-dessus, ou en effaçant les données de navigation de ce site depuis les réglages de votre navigateur.</p>
+
+    <h2>Autres liens du site</h2>
+    <p>Voir aussi la <a href="politique-confidentialite.html">politique de confidentialité</a> et les <a href="conditions-utilisation.html">conditions d'utilisation</a>.</p>
+
+    <div class="legal-note">Cette page est fournie à titre informatif et ne remplace pas un conseil juridique personnalisé.</div>
+</div>
+
+<script>window.KIDDO_ADS = { simple: [], atOptions: [], registerSW: false };</script>
+<script src="consent.js" defer></script>
+<script>
+    function updateStatus() {
+        var el = document.getElementById('kc-status');
+        if (!el) return;
+        var v = null;
+        try { v = localStorage.getItem('kiddo_consent'); } catch (e) {}
+        el.textContent = v === 'accepted' ? 'Cookies acceptés' : (v === 'rejected' ? 'Cookies refusés' : 'Aucun choix enregistré pour le moment');
+    }
+    document.addEventListener('DOMContentLoaded', updateStatus);
+    window.addEventListener('kiddo:consent-changed', updateStatus);
+</script>
+</body>
+</html>
