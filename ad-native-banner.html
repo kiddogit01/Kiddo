@@ -5,28 +5,58 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Pub AdSterra Native Banner (flottante)</title>
 <style>
-html,body{margin:0;height:100%;background:transparent!important;overflow:hidden}
-/* La bannière elle-même flotte, comme le bouton Kiddo Services de l'index */
-#float{position:fixed;right:20px;bottom:calc(24px + env(safe-area-inset-bottom));z-index:400;border-radius:14px;overflow:hidden;
+html,body{margin:0;height:100%;background:transparent!important;scrollbar-width:none}
+html{overflow:auto}body{overflow:visible}
+::-webkit-scrollbar{display:none}
+#stage{position:relative;width:100%;height:100%}
+#float{position:absolute;right:20px;bottom:24px;border-radius:14px;overflow:hidden;background:#071322;
  box-shadow:0 6px 24px rgba(0,0,0,.45);animation:pulse 2.6s ease-in-out infinite}
+#grip{height:14px;display:flex;align-items:center;justify-content:center;background:#0b1a30;touch-action:none;cursor:grab}
+#grip i{width:34px;height:4px;border-radius:2px;background:rgba(234,244,255,.6)}
 @keyframes pulse{0%,100%{box-shadow:0 6px 24px rgba(0,0,0,.45),0 0 0 0 rgba(41,193,255,.45)}50%{box-shadow:0 6px 24px rgba(0,0,0,.45),0 0 0 9px rgba(41,193,255,0)}}
 </style>
 </head>
 <body>
-<div id="float">
-<div style="width:min(320px,calc(100vw - 40px));max-height:calc(100vh - 48px)">
+<div id="stage"><div id="float"><div id="grip" aria-label="Déplacer"><i></i></div>
+<div style="width:min(320px,calc(100vw - 40px))">
 <script async="async" data-cfasync="false" src="https://pl31437230.profitableratecpmnetwork.com/e175405a295d5260b702739bb32ab910/invoke.js"></script>
 <div id="container-e175405a295d5260b702739bb32ab910"></div>
 </div>
-</div>
+</div></div>
 <script>
-var fl=document.getElementById('float');
-/* taille native gérée par la régie */
-// Taille de la bannière envoyée à l'app (pour ajuster la WebView) : AndroidBridge.onBannerSize(largeur, hauteur) en px CSS
-function report(){ try{ var r=fl.getBoundingClientRect();
-  if(window.AndroidBridge && AndroidBridge.onBannerSize) AndroidBridge.onBannerSize(Math.ceil(r.width+40), Math.ceil(r.height+48)); }catch(e){} }
-if(window.ResizeObserver) new ResizeObserver(report).observe(fl);
-addEventListener('load',report); addEventListener('resize',report);
+// ---- Réglages (ou dans l'URL : ?pos=top-left|top-right|bottom-left|bottom-right&snap=0&drag=0) ----
+var Q=new URLSearchParams(location.search), POS=(Q.get('pos')||'bottom-right').split('-');
+var SNAP=Q.get('snap')!=='0', DRAG=Q.get('drag')!=='0', MX=20, MY=24;   // marges comme le bouton Kiddo Services
+var NAT=null;   // taille naturelle [l, h] de la pub (null = mesurée)
+var stage=document.getElementById('stage'), fl=document.getElementById('float'), grip=document.getElementById('grip');
+if(!DRAG) grip.style.display='none';
+
+// Position ancrée à un coin : reste collée au coin quand la hauteur de la WebView change
+function place(h,v,ox,oy){ var s=fl.style; s.left=s.right=s.top=s.bottom='auto'; s[h]=ox+'px'; s[v]=oy+'px'; }
+place(POS[1]==='left'?'left':'right', POS[0]==='top'?'top':'bottom', MX, MY);
+
+
+// La page défile si la WebView est plus petite que la pub (jamais de réduction par la hauteur)
+function sizeStage(){ stage.style.minWidth=(fl.offsetWidth+2*MX)+'px'; stage.style.minHeight=(fl.offsetHeight+2*MY)+'px'; }
+var lw=0,lh=0;
+function report(){ try{ if(!(window.AndroidBridge&&AndroidBridge.onBannerSize)) return;
+  var w=NAT?NAT[0]+2*MX:fl.offsetWidth+2*MX, h=NAT?NAT[1]+14+2*MY:fl.offsetHeight+2*MY;
+  if(w===lw&&h===lh) return; lw=w; lh=h; AndroidBridge.onBannerSize(w,h); }catch(e){} }
+function update(){ sizeStage(); report(); }
+if(window.ResizeObserver) new ResizeObserver(update).observe(fl);
+addEventListener('load',update); update();
+
+// Glisser-déposer par la poignée (la pub reste cliquable)
+var d=null;
+grip.addEventListener('pointerdown',function(e){ var r=fl.getBoundingClientRect(); d={x:e.clientX-r.left,y:e.clientY-r.top}; grip.setPointerCapture(e.pointerId); });
+function pos(e){ var s=stage.getBoundingClientRect(), w=fl.offsetWidth, h=fl.offsetHeight;
+  return {x:Math.min(Math.max(0,e.clientX-s.left-d.x),s.width-w), y:Math.min(Math.max(0,e.clientY-s.top-d.y),s.height-h), W:s.width, H:s.height, w:w, h:h}; }
+grip.addEventListener('pointermove',function(e){ if(!d) return; var p=pos(e); place('left','top',p.x,p.y); });
+function drop(e){ if(!d) return; var p=pos(e); d=null;
+  var hh=(p.x+p.w/2<p.W/2)?'left':'right', vv=(p.y+p.h/2<p.H/2)?'top':'bottom';
+  var ox=SNAP?MX:(hh==='left'?p.x:p.W-p.w-p.x), oy=vv==='top'?p.y:p.H-p.h-p.y;
+  place(hh,vv,ox,oy); }
+grip.addEventListener('pointerup',drop); grip.addEventListener('pointercancel',drop);
 </script>
 </body>
 </html>
