@@ -276,6 +276,12 @@
         .event-card-desc { font-size: 0.82rem; color: #8a8b9c; line-height: 1.6; margin-bottom: 12px; }
         .event-card-cta { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; color: var(--secondary-glow); letter-spacing: 0.5px; text-transform: uppercase; }
 
+        /* Carte épinglée (événement spécial) */
+        .event-card.pinned { border-color: rgba(0,240,255,0.55); box-shadow: 0 0 22px rgba(0,240,255,0.25); }
+        .pin-badge { position: absolute; top: 10px; left: 10px; z-index: 3; background: rgba(13,14,21,0.85);
+            border: 1px solid rgba(0,240,255,0.5); color: var(--secondary-glow); font-size: 0.7rem; font-weight: 700;
+            padding: 5px 11px; border-radius: 50px; letter-spacing: 0.5px; }
+
         /* Points clignotants */
         @keyframes blink {
             0%, 100% { opacity: 1; transform: scale(1); }
@@ -643,6 +649,35 @@
     ============================================================ -->
     <div class="tab-content" id="tab-events">
 
+        <!-- ================================================
+             📌 ÉVÉNEMENT ÉPINGLÉ — BÊTA TESTEURS Lv-UP STORE
+        ================================================ -->
+        <div class="section-title">
+            <i class="fas fa-thumbtack"></i> Épinglé
+        </div>
+
+        <div class="event-grid">
+            <a class="event-card pinned" id="beta-lvup-card" href="beta-testeur.html">
+                <div class="event-card-media">
+                    <img class="event-card-img" loading="lazy"
+                         src="https://www.gamelvup.com/lvupstore%20banner.jpg"
+                         alt="Lv-UP STORE — devenir bêta testeur"
+                         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                    <div class="event-img-placeholder"><i class="fas fa-flask"></i></div>
+                    <span class="pin-badge"><i class="fas fa-thumbtack"></i> Épinglé</span>
+                </div>
+                <div class="event-card-body">
+                    <div class="event-card-title">Deviens bêta testeur de Lv-UP STORE</div>
+                    <div class="event-card-desc">
+                        Rejoins le groupe fermé des bêta testeurs, teste les nouveautés et les bugs corrigés avant tout le monde, et donne tes retours pendant 14 jours.
+                    </div>
+                    <div class="event-card-cta">
+                        <i class="fas fa-arrow-right"></i> Devenir bêta testeur
+                    </div>
+                </div>
+            </a>
+        </div>
+
         <div class="section-title">
             <i class="fas fa-trophy"></i> Compétitions
         </div>
@@ -650,23 +685,73 @@
         <div class="event-grid">
 
             <!-- ================================================
-                 🏆 MOBILE LEGENDS × GOOGLE PLAY LEAGUE
+                 🏆 ANGRY BIRDS 2 × GOOGLE PLAY GAMES LEAGUES
             ================================================ -->
-            <a class="event-card comp-active" id="mobilelegends-league-card"
-               href="https://leagues.withgoogle.com/fr/mobile-legends/"
-               target="_blank">
+            <a class="event-card comp-active" id="angrybirds2-league-card"
+               href="https://leagues.withgoogle.com/fr/angry-birds-2/"
+               target="_blank" rel="noopener">
                 <img class="event-card-img" loading="lazy"
-                     src="https://leagues.withgoogle.com/fr/static/mobile-legends/hero-image.webp"
-                     alt="Mobile Legends x Google Play League"
+                     src="https://leagues.withgoogle.com/fr/static/angry-birds-2/hero-image.webp"
+                     alt="Angry Birds 2 — Google Play Games Leagues"
                      onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
                 <div class="event-img-placeholder"><i class="fas fa-trophy"></i></div>
                 <div class="event-card-body">
                     <span style="display:inline-flex;align-items:center;gap:6px;color:#00ff88;font-weight:700;font-size:0.78rem;margin-bottom:8px;">
                         <span class="live-dot green"></span> Ligue en cours
                     </span>
-                    <div class="event-card-title">Mobile Legends × Google Play League</div>
+                    <div class="event-card-title">Angry Birds 2 × Google Play Games Leagues</div>
                     <div class="event-card-desc">
-                        Affronte d'autres joueurs sur Mobile Legends, cumule de la Gloire et grimpe au classement pour gagner des Google Play Points échangeables contre des récompenses in-game.
+                        Rejoins la ligue Angry Birds 2, affronte d'autres joueurs et grimpe au classement pour tenter de décrocher des récompenses.
+                    </div>
+                    <div class="event-card-cta" style="color: #00ff88;">
+                        <i class="fas fa-arrow-right"></i> Participer à la ligue
+                    </div>
+                </div>
+            </a>
+
+            <!-- ================================================
+                 🏆 8 BALL POOL × GOOGLE PLAY GAMES LEAGUES
+            ================================================ -->
+            <a class="event-card comp-active" id="8ballpool-league-card"
+               href="https://leagues.withgoogle.com/fr/8-ball-pool/"
+               target="_blank" rel="noopener">
+                <img class="event-card-img" loading="lazy"
+                     src="https://leagues.withgoogle.com/fr/static/8-ball-pool/hero-image.webp"
+                     alt="8 Ball Pool — Google Play Games Leagues"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="event-img-placeholder"><i class="fas fa-trophy"></i></div>
+                <div class="event-card-body">
+                    <span style="display:inline-flex;align-items:center;gap:6px;color:#00ff88;font-weight:700;font-size:0.78rem;margin-bottom:8px;">
+                        <span class="live-dot green"></span> Ligue en cours
+                    </span>
+                    <div class="event-card-title">8 Ball Pool × Google Play Games Leagues</div>
+                    <div class="event-card-desc">
+                        Rejoins la ligue 8 Ball Pool, montre ton niveau au billard et grimpe au classement pour tenter de décrocher des récompenses.
+                    </div>
+                    <div class="event-card-cta" style="color: #00ff88;">
+                        <i class="fas fa-arrow-right"></i> Participer à la ligue
+                    </div>
+                </div>
+            </a>
+
+            <!-- ================================================
+                 🏆 FREE FIRE × GOOGLE PLAY GAMES LEAGUES
+            ================================================ -->
+            <a class="event-card comp-active" id="freefire-league-card"
+               href="https://leagues.withgoogle.com/fr/free-fire/"
+               target="_blank" rel="noopener">
+                <img class="event-card-img" loading="lazy"
+                     src="https://leagues.withgoogle.com/fr/static/free-fire/hero-image.webp"
+                     alt="Free Fire — Google Play Games Leagues"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="event-img-placeholder"><i class="fas fa-trophy"></i></div>
+                <div class="event-card-body">
+                    <span style="display:inline-flex;align-items:center;gap:6px;color:#00ff88;font-weight:700;font-size:0.78rem;margin-bottom:8px;">
+                        <span class="live-dot green"></span> Ligue en cours
+                    </span>
+                    <div class="event-card-title">Free Fire × Google Play Games Leagues</div>
+                    <div class="event-card-desc">
+                        Rejoins la ligue Free Fire, affronte d'autres joueurs et grimpe au classement pour tenter de décrocher des récompenses.
                     </div>
                     <div class="event-card-cta" style="color: #00ff88;">
                         <i class="fas fa-arrow-right"></i> Participer à la ligue
@@ -962,18 +1047,6 @@
         <div class="popup-title" id="vote-popup-title">Tu ne trouves pas ton bonheur ? 🎮</div>
         <div class="popup-desc" id="vote-popup-desc">
             Rejoins nos canaux Telegram et WhatsApp pour voter le prochain jeu à ajouter sur le site !
-        </div>
-        <div style="margin-bottom:18px;display:flex;justify-content:center;overflow:hidden;border-radius:10px;">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : '4dea3f2d83bff8e76846e5fc0bacae9e',
-                    'format' : 'iframe',
-                    'height' : 250,
-                    'width' : 300,
-                    'params' : {}
-                };
-            </script>
-            <script src="https://www.highrevenueformat.com/4dea3f2d83bff8e76846e5fc0bacae9e/invoke.js"></script>
         </div>
         <div class="popup-actions" style="flex-direction: column;">
             <a href="https://t.me/KiddoGamplay" target="_blank" rel="noopener noreferrer"
