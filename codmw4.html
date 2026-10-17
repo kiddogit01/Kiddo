@@ -135,6 +135,14 @@
         }
         .tuto-overlay i.warn-icon { font-size: 1.4rem; color: #ff4444; }
         .tuto-overlay span { font-weight: 700; font-size: 0.9rem; color: #ff6b6b; }
+        .yt-notify-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            margin-top: 12px; padding: 8px 16px; border-radius: 20px;
+            background: linear-gradient(135deg, #ff3333, #cc0000); color: #fff;
+            font-size: 0.76rem; font-weight: 700; text-decoration: none;
+            box-shadow: 0 4px 14px rgba(255,50,50,0.35); transition: transform 0.2s ease;
+        }
+        .yt-notify-btn:hover { transform: scale(1.05); }
 
         /* Note finale */
         .final-note {
@@ -281,16 +289,30 @@
             <div class="step-title">Suivre ce tutoriel</div>
         </div>
         <div class="tuto-video-box">
-            <iframe src="https://www.youtube.com/embed/z93m06A5Q4w?rel=0&modestbranding=1"
-                    title="Tutoriel d'installation Call of Duty: Modern Warfare 4" allow="autoplay; encrypted-media; picture-in-picture"
-                    allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0;"></iframe>
+            <i class="fas fa-clapperboard"></i>
+            <div class="tuto-overlay">
+                <i class="fas fa-triangle-exclamation warn-icon"></i>
+                <span>Tutoriel en cours de création 🚧</span>
+                <a href="https://youtube.com/@kiddo_gamplay" target="_blank" rel="noopener noreferrer" class="yt-notify-btn">
+                    <i class="fab fa-youtube"></i> S'abonner pour être notifié
+                </a>
+            </div>
         </div>
     </div>
 
     <div class="final-note">
         <i class="fas fa-circle-info"></i>
-        <div>Suivez toutes les étapes du tutoriel pour une installation réussie.</div>
+        <div>Téléchargez l'émulateur puis le fichier du jeu, et suivez le tutoriel dès qu'il sera disponible pour une installation réussie.</div>
     </div>
+
+    <div class="section-title"><i class="fas fa-microchip"></i> Caractéristiques recommandées</div>
+
+    <table class="specs-table">
+        <tr><th colspan="2">Configuration conseillée</th></tr>
+        <tr><td>Processeur</td><td>Snapdragon 865</td></tr>
+        <tr><td>Version Android</td><td>Android 12</td></tr>
+        <tr><td>RAM</td><td>8 Go</td></tr>
+    </table>
 
     <!-- AdSterra — bannière 728x90 en fin de page (conteneur scrollable pour ne pas casser le mobile) -->
     <div style="width:100%;max-width:728px;margin:22px auto 0;overflow-x:auto;">
