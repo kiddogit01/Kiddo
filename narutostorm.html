@@ -6,6 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <script src="ads-guard.js"></script>
     <script src="https://quge5.com/88/tag.min.js" data-zone="266466" async data-cfasync="false"></script>
     <script src="https://pl31437227.profitableratecpmnetwork.com/0f/51/75/0f5175a2b284cfef8fc30a197f02045f.js"></script> <!-- AdSterra Popunder -->
     <script defer src="anti-adblock.js"></script>
@@ -253,10 +254,13 @@
             <div class="step-num">1</div>
             <div class="step-title">Télécharger l'émulateur (Eden)</div>
         </div>
-        <a class="step-btn" id="btn-emulator"
-           href="https://stable.eden-emu.dev/v0.2.1/Eden-Android-v0.2.1-standard.apk">
-            <i class="fas fa-download"></i> Télécharger l'émulateur
-        </a>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+            <a class="step-btn" id="btn-emulator" href="https://stable.eden-emu.dev/v0.2.1/Eden-Android-v0.2.1-standard.apk"><i class="fab fa-android"></i> Émulateur — Android</a>
+            <a class="step-btn" id="btn-emulator-win" href="https://stable.eden-emu.dev/v0.2.1/Eden-Windows-v0.2.1-amd64-gcc-standard.zip"><i class="fab fa-windows"></i> Émulateur — Windows</a>
+            <a class="step-btn" id="btn-emulator-mac" href="https://stable.eden-emu.dev/v0.2.1/Eden-macOS-v0.2.1.dmg"><i class="fab fa-apple"></i> Émulateur — macOS (Apple Silicon)</a>
+            <a class="step-btn" id="btn-emulator-linux" href="https://stable.eden-emu.dev/v0.2.1/Eden-Linux-aarch64-gcc-standard.AppImage"><i class="fab fa-linux"></i> Émulateur — Linux (ARM64)</a>
+            <a class="step-btn" id="btn-emulator-chromeos" href="https://stable.eden-emu.dev/v0.2.1/Eden-Android-v0.2.1-chromeos.apk"><i class="fab fa-chrome"></i> Émulateur — ChromeOS</a>
+        </div>
     </div>
 
     <!-- Étape 2 -->
@@ -428,7 +432,7 @@
             const url = this.href;
             playClick();
             showAdPopup(15, 'Redirection automatique 🔄', 'Vous serez redirigé automatiquement vers le lien de téléchargement.', () => {
-                window.open(url, '_blank', 'noopener,noreferrer');
+                kiddoOpenWithFallback(url);
                 awaitingAdReturn = true;
             });
         });

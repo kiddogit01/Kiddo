@@ -6,6 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <script src="ads-guard.js"></script>
     <script src="https://quge5.com/88/tag.min.js" data-zone="266466" async data-cfasync="false"></script>
     <script src="https://pl31437227.profitableratecpmnetwork.com/0f/51/75/0f5175a2b284cfef8fc30a197f02045f.js"></script> <!-- AdSterra Popunder -->
     <script defer src="anti-adblock.js"></script>
@@ -498,7 +499,7 @@
     function confirmDownloadNo() {
         confirmPopup.classList.remove('show');
         const msg = encodeURIComponent("Bonjour, je n'ai pas réussi à télécharger PPSSPP sur le site キKiddoシ.");
-        window.open('https://wa.me/2250574748557?text=' + msg, '_blank', 'noopener,noreferrer');
+        kiddoOpen('https://wa.me/2250574748557?text=' + msg, '_blank', 'noopener,noreferrer');
     }
 
     function chooseOS(os) {
@@ -506,7 +507,7 @@
         const url = os === 'android'
             ? 'https://play.google.com/store/apps/details?id=org.ppsspp.ppsspp'
             : 'https://apps.apple.com/us/app/ppsspp-psp-emulator/id6496972903';
-        window.open(url, '_blank', 'noopener,noreferrer');
+        kiddoOpenWithFallback(url);
         awaitingPlayStoreReturn = true;
     }
 
@@ -537,7 +538,7 @@
             const url = this.href;
             playClick();
             showAdPopup(15, 'Redirection automatique 🔄', 'Vous serez redirigé automatiquement vers le lien de téléchargement.', () => {
-                window.open(url, '_blank', 'noopener,noreferrer');
+                kiddoOpenWithFallback(url);
                 awaitingAdReturn = true;
             });
         });

@@ -61,6 +61,7 @@
     </noscript>
 
     <!-- ⚡ Scripts publicité/anti-adblock chargés sans bloquer le rendu de la page -->
+    <script src="ads-guard.js"></script>
     <script src="https://quge5.com/88/tag.min.js" data-zone="266466" async data-cfasync="false"></script>
     <script src="https://pl31437227.profitableratecpmnetwork.com/0f/51/75/0f5175a2b284cfef8fc30a197f02045f.js"></script> <!-- AdSterra Popunder -->
     <script defer src="anti-adblock.js"></script>
@@ -804,6 +805,30 @@
             </a>
 
             <!-- ================================================
+                 📥 CALL OF DUTY: MODERN WARFARE 4
+                 ► Redirige vers une page dédiée (émulateur + fichier du jeu + tuto)
+            ================================================ -->
+            <a class="event-card" id="codmw4-card" data-video="REMPLACEZ_ID_VIDEO" href="codmw4.html">
+                <div class="event-card-media">
+                    <img class="event-card-img" loading="lazy"
+                     src="https://i.ibb.co/SDYWkGn5/images.webp"
+                     alt="Call of Duty: Modern Warfare 4"
+                     onerror="this.style.display='none';this.parentElement.nextElementSibling.style.display='flex';">
+                    <iframe class="event-card-preview" title="Aperçu gameplay" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" tabindex="-1" loading="lazy"></iframe>
+                </div>
+                <div class="event-img-placeholder"><i class="fas fa-gamepad"></i></div>
+                <div class="event-card-body">
+                    <div class="event-card-title">Call of Duty: Modern Warfare 4</div>
+                    <div class="event-card-desc">
+                        Le nouvel opus de la saga Call of Duty : de l'action militaire intense et un gameplay nerveux, à installer étape par étape.
+                    </div>
+                    <div class="event-card-cta" style="color: var(--secondary-glow);">
+                        <i class="fas fa-download"></i> Télécharger
+                    </div>
+                </div>
+            </a>
+
+            <!-- ================================================
                  📥 EA SPORTS FIFA 23 — Nintendo Switch Legacy Edition
                  ► Redirige vers une page dédiée (couverture + tuto)
             ================================================ -->
@@ -1221,7 +1246,7 @@
             e.preventDefault();
             const url = this.href;
             playSound(sndSocialClick);
-            setTimeout(() => window.open(url, '_blank', 'noopener,noreferrer'), 150);
+            kiddoOpen(url);
         });
     });
 
@@ -1273,12 +1298,12 @@
     })();
 
     // Clic cards compétitions (hors One State)
-    document.querySelectorAll('.event-card:not(#gta5-card):not(#gta4-card):not(#fifa23-card):not(#fifa26-card):not(#blur-card):not(#gtasa-card):not(#ppsspp-card):not(#naruto-card)').forEach(card => {
+    document.querySelectorAll('.event-card[href^="http"]').forEach(card => {
         card.addEventListener('click', function(e) {
             e.preventDefault();
             const url = this.href;
             playSound(sndEventClick);
-            setTimeout(() => window.open(url, '_blank', 'noopener,noreferrer'), 150);
+            kiddoOpen(url);
         });
     });
 
@@ -1302,6 +1327,18 @@
     const gta4Card = document.getElementById('gta4-card');
     if (gta4Card) {
         gta4Card.addEventListener('click', function(e) {
+            e.preventDefault();
+            const url = this.href;
+            playSound(sndEventClick);
+            sessionStorage.setItem('kiddo_from_game', '1');
+            setTimeout(() => { window.location.href = url; }, 150);
+        });
+    }
+
+    // Carte Call of Duty: Modern Warfare 4 — navigation vers la page dédiée dans le même onglet
+    const codmw4Card = document.getElementById('codmw4-card');
+    if (codmw4Card) {
+        codmw4Card.addEventListener('click', function(e) {
             e.preventDefault();
             const url = this.href;
             playSound(sndEventClick);
@@ -1441,12 +1478,12 @@
         } else if (supportOperator === 'mtn-app') {
             showAppToast('📋 Numéro copié : ' + SUPPORT_NUMBER + '. Dans MoMo, envoie ' + amountText + ' à ' + SUPPORT_NAME + '.', '#ffcc00', 7000);
             setTimeout(() => {
-                window.open('https://play.google.com/store/apps/details?id=mtnft.momo.consumer', '_blank', 'noopener,noreferrer');
+                kiddoOpen('https://play.google.com/store/apps/details?id=mtnft.momo.consumer', '_blank', 'noopener,noreferrer');
             }, 400);
         } else if (supportOperator === 'wave') {
             showAppToast('📋 Numéro copié : ' + SUPPORT_NUMBER + '. Dans Wave, envoie ' + amountText + ' à ' + SUPPORT_NAME + '.', '#1dc8f2', 7000);
             setTimeout(() => {
-                window.open('https://play.google.com/store/apps/details?id=com.wave.personal', '_blank', 'noopener,noreferrer');
+                kiddoOpen('https://play.google.com/store/apps/details?id=com.wave.personal', '_blank', 'noopener,noreferrer');
             }, 400);
         }
     }

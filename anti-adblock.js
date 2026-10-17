@@ -103,27 +103,40 @@
         }, 100);
     }
 
-    // Méthode 2 — tentative de chargement du vrai script publicitaire
-    // (celle qui détecte aussi les blocages DNS type AdGuard)
+    // Méthode 2 — sonde réseau vers le domaine de la pub (détecte aussi les blocages DNS type AdGuard).
+    // On utilise fetch() : rien n'est exécuté ni ajouté à la page. (Avant, un nouveau <script> Monetag
+    // était injecté toutes les 3 s sans jamais être retiré → des dizaines de copies, des clics
+    // détournés en boucle et des requêtes inutiles vers Monetag.)
     function detectViaScriptLoad(callback) {
         var settled = false;
+        var ctrl = ('AbortController' in window) ? new AbortController() : null;
         var timer = setTimeout(function () {
-            if (!settled) { settled = true; callback(true); }
+            if (settled) return;
+            settled = true;
+            if (ctrl) { try { ctrl.abort(); } catch (e) {} }
+            callback(true);
         }, SCRIPT_TIMEOUT);
 
-        var s = document.createElement('script');
-        s.src = AD_TEST_URL + '?_=' + Date.now();
-        s.async = true;
-        s.onload = function () {
-            if (!settled) { settled = true; clearTimeout(timer); callback(false); }
-        };
-        s.onerror = function () {
-            if (!settled) { settled = true; clearTimeout(timer); callback(true); }
-        };
-        document.head.appendChild(s);
+        function done(blocked) {
+            if (settled) return;
+            settled = true;
+            clearTimeout(timer);
+            callback(blocked);
+        }
+        try {
+            fetch(AD_TEST_URL + '?_=' + Date.now(), {
+                method: 'GET', mode: 'no-cors', cache: 'no-store', credentials: 'omit',
+                signal: ctrl ? ctrl.signal : undefined
+            }).then(function () { done(false); }, function () { done(true); });
+        } catch (e) { done(false); }
     }
 
+    var recheckTimer = null;
+    var lastRun = 0;
+
     function runCheck() {
+        clearTimeout(recheckTimer);
+        lastRun = Date.now();
         detectViaBait(function (baitBlocked) {
             detectViaScriptLoad(function (scriptBlocked) {
                 var blocked = baitBlocked || scriptBlocked;
@@ -131,19 +144,20 @@
                 if (blocked) {
                     wasBlocked = true;
                     showOverlay();
+                    // Tant que c'est bloqué on revérifie, pour recharger dès que le bloqueur est coupé
+                    recheckTimer = setTimeout(runCheck, RECHECK_MS);
                     return;
                 }
 
                 if (wasBlocked && canAutoReload()) {
-                    // Le bloqueur vient d'être désactivé : le vrai script pub
-                    // (chargé une seule fois dans le <head>) a déjà échoué et
-                    // ne réessaiera pas tout seul → on recharge la page pour
-                    // qu'il reparte à zéro et que les pubs s'affichent enfin.
+                    // Le bloqueur vient d'être désactivé : le script pub chargé dans le <head> a
+                    // échoué et ne réessaiera pas tout seul → on recharge la page.
                     markAutoReload();
                     window.location.reload();
                     return;
                 }
 
+                // Pas de blocage : on s'arrête là (plus de vérification permanente en arrière-plan)
                 wasBlocked = false;
                 hideOverlay();
             });
@@ -152,7 +166,10 @@
 
     function start() {
         setTimeout(runCheck, CHECK_DELAY_MS);
-        setInterval(runCheck, RECHECK_MS);
+        // Au retour sur l'onglet (ex. après avoir désactivé le bloqueur), une nouvelle vérification
+        document.addEventListener('visibilitychange', function () {
+            if (document.visibilityState === 'visible' && Date.now() - lastRun > 30000) runCheck();
+        });
     }
 
     if (document.readyState === 'complete' || document.readyState === 'interactive') {

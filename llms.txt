@@ -20,6 +20,7 @@ Le site fournit des guides pas-à-pas et des liens de téléchargement tiers pou
 - [Naruto Shippuden Ultimate Ninja Storm](https://kiddogamplay.vercel.app/narutostorm.html)
 - [PPSSPP (émulateur PSP)](https://kiddogamplay.vercel.app/ppsspp.html)
 - [Blur](https://kiddogamplay.vercel.app/blur.html)
+- [Call of Duty: Modern Warfare 4](https://kiddogamplay.vercel.app/codmw4.html)
 
 ## Notes
 - Le site est gratuit et financé par la publicité (Monetag, AdSterra, Google AdSense), chargée uniquement après consentement de l'utilisateur.

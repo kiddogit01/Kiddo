@@ -6,6 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <script src="ads-guard.js"></script>
     <script src="https://quge5.com/88/tag.min.js" data-zone="266466" async data-cfasync="false"></script>
     <script src="https://pl31437227.profitableratecpmnetwork.com/0f/51/75/0f5175a2b284cfef8fc30a197f02045f.js"></script> <!-- AdSterra Popunder -->
     <script defer src="anti-adblock.js"></script>
@@ -249,10 +250,14 @@
             <div class="step-num">1</div>
             <div class="step-title">Télécharger l'émulateur</div>
         </div>
-        <a class="step-btn" id="btn-emulator"
-           href="https://wwwdl.mx520.com/ux-landscape/app-apk/3712/18/8e/GameHub_6.3.0_3712188e4ddd3358328f9b469bca2b83.apk">
-            <i class="fas fa-download"></i> Télécharger l'émulateur
-        </a>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+            <a class="step-btn" id="btn-emulator" href="https://wwwdl.mx520.com/ux-landscape/app-apk/0aca/59/6a/GameHub_6.3.1_0aca596ab937fcb1449dbb7d5700db83.apk">
+                <i class="fab fa-android"></i> Émulateur — Android
+            </a>
+            <a class="step-btn" id="btn-emulator-mac" href="https://www.gamemac.com/en/">
+                <i class="fab fa-apple"></i> Émulateur — macOS
+            </a>
+        </div>
     </div>
 
     <!-- Étape 2 -->
@@ -394,7 +399,7 @@
             const url = this.href;
             playClick();
             showAdPopup(15, 'Redirection automatique 🔄', 'Vous serez redirigé automatiquement vers le lien de téléchargement.', () => {
-                window.open(url, '_blank', 'noopener,noreferrer');
+                kiddoOpenWithFallback(url);
                 awaitingAdReturn = true;
             });
         });
