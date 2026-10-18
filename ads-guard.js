@@ -1,22 +1,21 @@
 /* ============================================================
    キKiddoシ — ads-guard.js
-   Garde-fou des pubs "au clic" (Monetag onclick, AdSterra popunder).
+   Garde-fou des pubs "au clic" (Monetag).
    À charger EN PREMIER dans le <head>, avant les scripts de pub.
 
    Ce qu'il règle :
    1) Un tap sur un lien / une carte / le bouton retour n'ouvre
       JAMAIS de pub : la navigation passe toujours.
    2) Une seule pub "popup" à la fois et au plus une toutes les
-      CAP_MS (même si Monetag ET AdSterra se déclenchent sur le
-      même clic) — plus de doubles popups bloqués par le navigateur.
+      CAP_MS — plus de popups en rafale bloqués par le navigateur.
    3) Pas de pub dans les GRACE_MS qui suivent l'arrivée sur la page.
    4) Les ouvertures de liens du site passent par kiddoOpen() : elles
       ne sont jamais prises pour une pub. Si le navigateur bloque un
       lien ouvert après un compte à rebours, un bouton "Ouvrir le
       lien" s'affiche (kiddoOpenWithFallback).
 
-   Rien n'est retiré : Monetag, AdSterra, bannières, Social Bar,
-   Vignette et push restent actifs. Réglages ci-dessous.
+   Rien n'est retiré : le tag Monetag, la Vignette et le push
+   restent actifs. Réglages ci-dessous.
 ============================================================ */
 (function () {
     'use strict';

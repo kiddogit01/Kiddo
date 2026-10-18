@@ -23,5 +23,5 @@ Le site fournit des guides pas-à-pas et des liens de téléchargement tiers pou
 - [Call of Duty: Modern Warfare 4](https://kiddogamplay.vercel.app/codmw4.html)
 
 ## Notes
-- Le site est gratuit et financé par la publicité (Monetag, AdSterra, Google AdSense), chargée uniquement après consentement de l'utilisateur.
+- Le site est gratuit et financé par la publicité (Monetag, Google AdSense), chargée uniquement après consentement de l'utilisateur.
 - Le contenu est en français.
